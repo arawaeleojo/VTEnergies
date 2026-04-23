@@ -5,168 +5,795 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VT Energies | Engineering & Construction</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* --- COLOR PALETTE & VARIABLES --- */
+        :root {
+            /* Strict Grey Palette - No Pure Blacks */
+            --grey-900: #2b2e33;
+            --grey-800: #3a3f45;
+            --grey-600: #6B7280;
+            --bg-soft: #F7F8FA;
+            --grey-100: #Eef0f3;
+            --orange: #F05A28;
+            --white: #FFFFFF;
+
+            /* Architectural Tech Utilities */
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --shadow-soft: 0 15px 35px rgba(43, 46, 51, 0.05);
+            --shadow-hover: 0 25px 50px rgba(43, 46, 51, 0.1);
+        }
+
+        /* --- GLOBAL & OVERFLOW FIX --- */
+        html,
+        body {
+            overflow-x: hidden !important;
+            width: 100%;
+            position: relative;
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--grey-900);
+            background-color: var(--bg-soft);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Color Classes */
+        .text-primary-grey {
+            color: var(--grey-900) !important;
+        }
+
+        .text-secondary-grey {
+            color: var(--grey-600) !important;
+        }
+
+        .text-orange {
+            color: var(--orange) !important;
+        }
+
+        .bg-primary-grey {
+            background-color: var(--grey-900) !important;
+        }
+
+        .bg-secondary-grey {
+            background-color: var(--grey-800) !important;
+        }
+
+        .bg-orange {
+            background-color: var(--orange) !important;
+        }
+
+        .bg-light-grey {
+            background-color: var(--grey-100) !important;
+        }
+
+        .bg-white {
+            background-color: var(--white) !important;
+        }
+
+        .bg-soft {
+            background-color: var(--bg-soft) !important;
+        }
+
+        /* Typography */
+        .fw-medium {
+            font-weight: 500;
+        }
+
+        .tracking-wide {
+            letter-spacing: 2px;
+        }
+
+        .tracking-widest {
+            letter-spacing: 4px;
+        }
+
+        /* --- OFFSET BORDER --- */
+        .offset-border {
+            position: relative;
+            display: inline-block;
+        }
+
+        .offset-border::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: -20px;
+            width: 100%;
+            height: 100%;
+            border: 3px solid var(--orange);
+            z-index: 0;
+            transition: all 0.4s ease;
+        }
+
+        .offset-border img {
+            position: relative;
+            z-index: 1;
+        }
+
+        .offset-border:hover::before {
+            top: 10px;
+            left: -10px;
+        }
+
+        /* --- BUTTONS --- */
+        .btn-custom {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            overflow: hidden;
+            border: none;
+            transition: all 0.4s ease;
+            z-index: 1;
+        }
+
+        .btn-custom::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: var(--grey-900);
+            z-index: -1;
+            transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .btn-custom-orange {
+            background: var(--orange);
+            color: var(--white);
+        }
+
+        .btn-custom-orange:hover {
+            color: var(--white);
+        }
+
+        .btn-custom-orange:hover::before {
+            width: 100%;
+        }
+
+        .btn-custom-outline {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-custom-outline::before {
+            background: var(--white);
+        }
+
+        .btn-custom-outline:hover {
+            color: var(--grey-900);
+            border-color: var(--white);
+        }
+
+        .btn-custom-outline:hover::before {
+            width: 100%;
+        }
+
+        /* --- FLOATING NAVBAR --- */
+        .navbar {
+            padding: 1.5rem 0;
+            transition: all 0.4s ease;
+            background: transparent;
+        }
+
+        .navbar.scrolled {
+            background: rgba(247, 248, 250, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 0.8rem 0;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .navbar.scrolled .nav-link {
+            color: var(--grey-900) !important;
+        }
+
+        .nav-link {
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin: 0 10px;
+            position: relative;
+            color: var(--white) !important;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--orange);
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            transform: translateX(-50%) scale(1);
+        }
+
+        /* --- THE STORYTELLING CAROUSEL HERO --- */
+        .hero-carousel {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            background: var(--grey-900);
+        }
+
+        .carousel-item {
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hero-bg-media {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transform: scale(1);
+            transition: transform 7s linear;
+            z-index: 0;
+        }
+
+        .carousel-item.active .hero-bg-media {
+            transform: scale(1.1);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(43, 46, 51, 0.95) 0%, rgba(43, 46, 51, 0.6) 40%, rgba(43, 46, 51, 0.1) 100%);
+            z-index: 1;
+        }
+
+        .hero-content-box {
+            position: relative;
+            z-index: 2;
+        }
+
+        .animate-element {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.9s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .carousel-item.active .animate-element {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 {
+            transition-delay: 0.3s;
+        }
+
+        .delay-2 {
+            transition-delay: 0.5s;
+        }
+
+        .delay-3 {
+            transition-delay: 0.7s;
+        }
+
+        .delay-4 {
+            transition-delay: 0.9s;
+        }
+
+        /* Container Aligned Indicators */
+        .carousel-indicators-wrapper {
+            position: absolute;
+            bottom: 3rem;
+            left: 0;
+            width: 100%;
+            z-index: 5;
+        }
+
+        .carousel-indicators {
+            position: static;
+            margin: 0;
+            justify-content: flex-start;
+        }
+
+        .carousel-indicators [data-bs-target] {
+            width: 40px;
+            height: 4px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border: none;
+            margin-right: 10px;
+            margin-left: 0;
+            transition: all 0.4s ease;
+        }
+
+        .carousel-indicators .active {
+            width: 80px;
+            background-color: var(--orange);
+        }
+
+        /* Custom Architectural Arrows */
+        .custom-arrow {
+            width: 60px;
+            height: 60px;
+            /* background: rgba(255, 255, 255, 0.05); */
+            /* border: 1px solid rgba(255, 255, 255, 0.2); */
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 1;
+            transition: all 0.3s ease;
+            z-index: 5;
+        }
+
+        .custom-arrow i {
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .custom-arrow:hover {
+            background: var(--orange);
+            border-color: var(--orange);
+        }
+
+        .carousel-control-prev.custom-arrow {
+            left: 3%;
+        }
+
+        .carousel-control-next.custom-arrow {
+            right: 3%;
+        }
+
+        /* --- BENTO GRID SYSTEM --- */
+        .bento-container {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+            grid-auto-rows: minmax(250px, auto);
+        }
+
+        .bento-item {
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+            background: var(--white);
+            transition: all 0.4s ease;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .bento-item:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-5px);
+        }
+
+        .bento-span-4 {
+            grid-column: span 4;
+        }
+
+        .bento-span-8 {
+            grid-column: span 8;
+        }
+
+        .bento-span-6 {
+            grid-column: span 6;
+        }
+
+        .bento-span-12 {
+            grid-column: span 12;
+        }
+
+        .bento-content {
+            padding: 2.5rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            z-index: 2;
+        }
+
+        .bento-img-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.8s ease;
+            z-index: 0;
+        }
+
+        .bento-item:hover .bento-img-bg {
+            transform: scale(1.08);
+        }
+
+        .bento-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(0deg, var(--grey-900) 0%, rgba(43, 46, 51, 0.2) 100%);
+            z-index: 1;
+        }
+
+        /* --- INTERACTIVE SERVICE CARDS --- */
+        .service-card-interactive {
+            background-color: var(--white);
+            border-top: 4px solid transparent;
+            transition: all 0.4s ease;
+        }
+
+        .service-card-interactive h4,
+        .service-card-interactive p,
+        .service-card-interactive .icon-transition {
+            transition: all 0.4s ease;
+        }
+
+        .service-card-interactive:hover {
+            background-color: var(--grey-800) !important;
+            border-top-color: var(--orange) !important;
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .service-card-interactive:hover h4,
+        .service-card-interactive:hover p {
+            color: var(--white) !important;
+        }
+
+        .service-card-interactive:hover p {
+            opacity: 0.85;
+        }
+
+        .service-card-interactive:hover .icon-transition {
+            color: var(--orange) !important;
+            transform: scale(1.1);
+        }
+
+        /* Animated Blueprint Grid for Dark Sections */
+        .bg-animated-grid {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bg-animated-grid::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: moveGrid 30s linear infinite;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @keyframes moveGrid {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(60px, 60px);
+            }
+        }
+
+        .bg-animated-grid>* {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Responsive Fixes */
+        @media (max-width: 991px) {
+            .navbar.scrolled {
+                background: var(--grey-900);
+            }
+
+            .navbar.scrolled .nav-link,
+            .navbar-toggler i {
+                color: var(--white) !important;
+            }
+
+            .hero-content-box {
+                margin-top: 5rem;
+            }
+
+            .bento-span-4,
+            .bento-span-8,
+            .bento-span-6 {
+                grid-column: span 12;
+            }
+
+            .carousel-indicators {
+                margin-left: 0;
+                justify-content: center;
+            }
+
+            .custom-arrow {
+                display: none !important;
+            }
+
+            /* Hide heavy arrows on mobile */
+        }
+    </style>
 </head>
 
 <body>
 
-    <nav class="navbar navbar-expand-lg fixed-top bg-charcoal navbar-dark shadow-lg py-3">
+    <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
         <div class="container">
             <a class="navbar-brand fw-bold text-uppercase fs-4" href="#">
-                <img src="assets/img/logo.png" alt="AI Media Logo" height="55">
+                <img src="assets/img/logo.png" alt="VT Energies Logo" height="50">           
             </a>
-            <button class="navbar-toggler rounded-0 border-0" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fa-solid fa-bars fs-2 text-white toggle-text"></i>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav gap-4 fw-semibold align-items-center">
-                    <li class="nav-item"><a class="nav-link text-white active" href="#">HOME</a></li>
-                    <li class="nav-item"><a class="nav-link text-light" href="#about">ABOUT</a></li>
-                    <li class="nav-item"><a class="nav-link text-light" href="#services">SERVICES</a></li>
-                    <li class="nav-item"><a class="nav-link text-light" href="#projects">PROJECTS</a></li>
-                    <li class="nav-item ms-lg-3"><a class="btn btn-orange rounded-0 px-4 py-2" href="#contact">CONTACT
-                            US</a></li>
+                <ul class="navbar-nav align-items-center">
+                    <li class="nav-item"><a class="nav-link toggle-text active" href="#">HOME</a></li>
+                    <li class="nav-item"><a class="nav-link toggle-text" href="#about">ABOUT</a></li>
+                    <!-- <li class="nav-item"><a class="nav-link toggle-text" href="#sectors">SECTORS</a></li> -->
+                    <li class="nav-item"><a class="nav-link toggle-text" href="#services">SERVICES</a></li>
+                    <li class="nav-item"><a class="nav-link toggle-text" href="#projects">PROJECTS</a></li>
+                    <li class="nav-item ms-lg-4 mt-3 mt-lg-0">
+                        <a class="btn-custom btn-custom-orange text-decoration-none" href="#contact-cta">Contact Us</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <header class="hero-section position-relative d-flex align-items-center py-5 overflow-hidden">
-        <div class="hero-bg-media"></div>
-        <div class="hero-gradient-overlay"></div>
+<header class="hero-carousel" id="home">
+    <div id="vtHeroCarousel" class="carousel slide carousel-fade h-100" data-bs-ride="carousel" data-bs-interval="7000">
 
-        <div class="container position-relative z-index-2 py-5 my-5">
-            <div class="row align-items-center">
-                <div class="col-lg-7" data-aos="fade-right" data-aos-duration="1200">
-                    <div class="d-inline-block bg-orange text-white px-3 py-1 fw-bold text-uppercase mb-4 tracking-wide"
-                        style="font-size: 0.8rem;">
-                        EPC & Industrial Solutions
-                    </div>
-                    <h1 class="display-2 fw-bold text-uppercase text-white mb-4 hero-title">
-                        Powering Industries.<br>
-                        <span class="text-orange">Delivering Scale.</span>
-                    </h1>
-                    <p class="lead text-light mb-5 pe-lg-5">
-                        We build, move, power, and sustain critical infrastructure across the Oil, Gas, and Marine
-                        sectors with unyielding precision.
-                    </p>
-                    <div class="d-flex gap-3 flex-wrap">
-                        <a href="#services"
-                            class="btn btn-orange rounded-0 btn-lg px-5 py-3 text-uppercase fw-bold shadow">Explore
-                            Services</a>
-                        <a href="#projects"
-                            class="btn btn-outline-light rounded-0 btn-lg px-5 py-3 text-uppercase fw-bold">Our
-                            Projects</a>
+        <div class="carousel-indicators-wrapper">
+            <div class="container">
+                <div class="carousel-indicators px-3 px-lg-0">
+                    <button type="button" data-bs-target="#vtHeroCarousel" data-bs-slide-to="0" class="active"
+                        aria-current="true"></button>
+                    <button type="button" data-bs-target="#vtHeroCarousel" data-bs-slide-to="1"></button>
+                    <button type="button" data-bs-target="#vtHeroCarousel" data-bs-slide-to="2"></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-inner h-100">
+            <div class="carousel-item active h-100">
+                <div class="hero-bg-media"
+                    style="background-image: url('https://images.unsplash.com/photo-1508450859948-4e04fabaa4ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                </div>
+                <div class="hero-overlay"></div>
+                <div class="container h-100 d-flex align-items-center position-relative z-index-2">
+                    <div class="row w-100">
+                        <div class="col-lg-8 hero-content-box px-3 px-lg-0">
+                            <span
+                                class="badge bg-orange px-3 py-2 text-uppercase tracking-widest mb-4 animate-element delay-1">Engineering
+                                & Fabrication</span>
+                            <h1 class="display-2 fw-bold text-white mb-4 animate-element delay-2"
+                                style="line-height: 1.1;">
+                                Building Industrial<br>Excellence.
+                            </h1>
+                            <p class="text-white opacity-75 fs-5 mb-5 animate-element delay-3"
+                                style="max-width: 650px;">
+                                We specialize in engineering, construction, fabrication, and the installation of
+                                heavy-duty onshore and offshore structures.
+                            </p>
+                            <div class="d-flex gap-4 animate-element delay-4">
+                                <a href="#services"
+                                    class="btn-custom btn-custom-orange text-decoration-none shadow-sm">Explore
+                                    Capabilities</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-lg-5 d-none d-lg-block position-relative h-100" data-aos="fade-left"
-                    data-aos-duration="1200" data-aos-delay="300">
-                    <div
-                        class="hero-badge badge-1 bg-charcoal text-white p-4 border-start border-4 border-orange shadow-lg position-absolute">
-                        <h3 class="fw-bold text-orange mb-1"><span class="counter" data-target="100">0</span>%</h3>
-                        <p class="text-uppercase tracking-wide mb-0" style="font-size: 0.75rem;">HSE Compliance</p>
+            <div class="carousel-item h-100">
+                <div class="hero-bg-media"
+                    style="background-image: url('https://images.unsplash.com/photo-1524661135-423995f22d0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');">
+                </div>
+                <div class="hero-overlay"></div>
+                <div class="container h-100 d-flex align-items-center position-relative z-index-2">
+                    <div class="row w-100">
+                        <div class="col-lg-8 hero-content-box px-3 px-lg-0">
+                            <span
+                                class="badge bg-orange px-3 py-2 text-uppercase tracking-widest mb-4 animate-element delay-1">Procurement
+                                & Logistics</span>
+                            <h1 class="display-2 fw-bold text-white mb-4 animate-element delay-2"
+                                style="line-height: 1.1;">
+                                Sourcing & Moving<br>Global Assets.
+                            </h1>
+                            <p class="text-white opacity-75 fs-5 mb-5 animate-element delay-3"
+                                style="max-width: 650px;">
+                                Delivering top-quality procurement, marine equipment supplies, and executing complex
+                                land and marine haulage to sustain operations.
+                            </p>
+                            <div class="d-flex gap-4 animate-element delay-4">
+                                <a href="#projects"
+                                    class="btn-custom btn-custom-orange text-decoration-none shadow-sm">View
+                                    Projects</a>
+                                <a href="#sectors" class="btn-custom btn-custom-outline text-decoration-none">Our
+                                    Sectors</a>
+                            </div>
+                        </div>
                     </div>
-                    <div
-                        class="hero-badge badge-2 bg-white text-charcoal p-4 border-start border-4 border-orange shadow-lg position-absolute">
-                        <h3 class="fw-bold mb-1"><span class="counter" data-target="15">0</span>+</h3>
-                        <p class="text-uppercase tracking-wide text-secondary mb-0" style="font-size: 0.75rem;">Years
-                            Experience</p>
+                </div>
+            </div>
+
+            <div class="carousel-item h-100">
+                <div class="hero-bg-media"
+                    style="background-image: url('https://images.unsplash.com/photo-1581094288338-2314dddb7ece?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');">
+                </div>
+                <div class="hero-overlay"></div>
+                <div class="container h-100 d-flex align-items-center position-relative z-index-2">
+                    <div class="row w-100">
+                        <div class="col-lg-8 hero-content-box px-3 px-lg-0">
+                            <span
+                                class="badge bg-orange px-3 py-2 text-uppercase tracking-widest mb-4 animate-element delay-1">Maintenance
+                                & Manpower</span>
+                            <h1 class="display-2 fw-bold text-white mb-4 animate-element delay-2"
+                                style="line-height: 1.1;">
+                                Sustaining Critical<br>Operations.
+                            </h1>
+                            <p class="text-white opacity-75 fs-5 mb-5 animate-element delay-3"
+                                style="max-width: 650px;">
+                                Providing expert valve repairs, equipment leasing, training and development, and highly
+                                skilled manpower with a strict zero-harm commitment.
+                            </p>
+                            <div class="d-flex gap-4 animate-element delay-4">
+                                <a href="#about"
+                                    class="btn-custom btn-custom-orange text-decoration-none shadow-sm">Discover VT
+                                    Edge</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </header>
+
+        <button class="carousel-control-prev custom-arrow d-none d-md-flex position-absolute" type="button"
+            data-bs-target="#vtHeroCarousel" data-bs-slide="prev">
+            <i class="fa-solid fa-chevron-left fs-4"></i>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next custom-arrow d-none d-md-flex position-absolute" type="button"
+            data-bs-target="#vtHeroCarousel" data-bs-slide="next">
+            <i class="fa-solid fa-chevron-right fs-4"></i>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</header>
 
     <section id="about" class="py-5 bg-white border-bottom border-light">
-        <div class="container py-5">
+        <div class="container py-5 my-lg-4">
             <div class="row align-items-center g-5">
-                <div class="col-lg-6" data-aos="fade-up">
-                    <h6 class="text-orange fw-bold text-uppercase mb-2">Our Identity</h6>
-                    <h2 class="display-5 fw-bold text-charcoal text-uppercase mb-4">A Global Name in Energy & Marine
-                    </h2>
-                    <p class="text-secondary fs-5 mb-4">VROI-TREZ Energies is a multi-sector industrial powerhouse. We
-                        align with international best practices to deliver top-quality, cost-effective EPC services
-                        across the Federal Republic of Nigeria and beyond.</p>
-
-                    <div class="row g-3 mt-2">
-                        <div class="col-sm-6">
-                            <ul class="list-unstyled text-charcoal fw-semibold">
-                                <li class="mb-2"><i class="fa-solid fa-check text-orange me-2"></i> Integrity &
-                                    Reliability</li>
-                                <li class="mb-2"><i class="fa-solid fa-check text-orange me-2"></i> Excellence in
-                                    Execution</li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-6">
-                            <ul class="list-unstyled text-charcoal fw-semibold">
-                                <li class="mb-2"><i class="fa-solid fa-check text-orange me-2"></i> Dependable Workforce
-                                </li>
-                                <li class="mb-2"><i class="fa-solid fa-check text-orange me-2"></i> Flawless Team Work
-                                </li>
-                            </ul>
-                        </div>
+                <div class="col-lg-5" data-aos="fade-right">
+                    <div class="offset-border">
+                        <img src="https://images.unsplash.com/photo-1508450859948-4e04fabaa4ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="About VT Energies" class="img-fluid shadow-sm">
                     </div>
                 </div>
-                <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="bg-offwhite p-5 border-start border-8 border-charcoal h-100 position-relative">
-                        <i
-                            class="fa-solid fa-quote-left fa-3x text-light-gray position-absolute top-0 start-0 ms-3 mt-3 opacity-25"></i>
-                        <h4 class="fw-bold text-uppercase mb-3 position-relative z-index-2">Our Mission</h4>
-                        <p class="text-secondary fst-italic position-relative z-index-2">"To consistently deliver
-                            top-quality, innovation and cost-effective service to our clients through value-adding
-                            strategies and ensure adherence to safe work practices."</p>
+                <div class="col-lg-6 offset-lg-1" data-aos="fade-left">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div style="width: 50px; height: 2px; background: var(--orange);"></div>
+                        <h6 class="text-orange fw-bold text-uppercase mb-0 tracking-wide">Corporate Identity</h6>
                     </div>
+                    <h2 class="display-5 fw-bold text-primary-grey mb-4">A Force in Energy & Marine Logistics</h2>
+                    <p class="text-secondary-grey fs-5 mb-4">
+                        VROI-TREZ Energies is a multi-sector industrial powerhouse. We align with international best
+                        practices to deliver top-quality, cost-effective EPC services.
+                    </p>
+                    <ul class="list-unstyled row g-3 mt-2 mb-5">
+                        <li class="col-sm-6 d-flex align-items-center gap-3 fw-medium text-primary-grey">
+                            <span
+                                class="bg-light-grey rounded-circle p-2 d-flex align-items-center justify-content-center"
+                                style="width: 40px; height: 40px;">
+                                <i class="fa-solid fa-check text-orange"></i>
+                            </span>
+                            Excellence in Execution
+                        </li>
+                        <li class="col-sm-6 d-flex align-items-center gap-3 fw-medium text-primary-grey">
+                            <span
+                                class="bg-light-grey rounded-circle p-2 d-flex align-items-center justify-content-center"
+                                style="width: 40px; height: 40px;">
+                                <i class="fa-solid fa-check text-orange"></i>
+                            </span>
+                            Dependable Workforce
+                        </li>
+                    </ul>
+                    <a href="#"
+                        class="text-primary-grey fw-bold text-uppercase text-decoration-none border-bottom border-2 border-orange pb-1">Read
+                        Full Profile</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="py-5 bg-offwhite">
+    <section id="sectors" class="py-5 bg-soft">
         <div class="container py-5">
-            <div class="text-center mb-5" data-aos="fade-up">
-                <h6 class="text-orange fw-bold text-uppercase mb-2">Global Reach</h6>
-                <h2 class="display-5 fw-bold text-charcoal text-uppercase">Sectors We Dominate</h2>
+            <div class="d-flex justify-content-between align-items-end mb-5" data-aos="fade-up">
+                <div>
+                    <h6 class="text-orange fw-bold text-uppercase mb-2 tracking-wide">Global Reach</h6>
+                    <h2 class="display-5 fw-bold text-primary-grey mb-0">Sectors We Dominate</h2>
+                </div>
             </div>
-            <div class="row g-4">
-                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="sector-card position-relative overflow-hidden h-100">
-                        <div class="sector-img bg-dark"
-                            style="height: 350px; background-image: url('https://images.unsplash.com/photo-1588011930968-eadac80e6a5a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+
+            <div class="bento-container">
+                <div class="bento-item bento-span-8" data-aos="fade-up" data-aos-delay="100">
+                    <div class="bento-img-bg"
+                        style="background-image: url('https://images.unsplash.com/photo-1588011930968-eadac80e6a5a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');">
+                    </div>
+                    <div class="bento-overlay"></div>
+                    <div class="bento-content">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <span class="badge bg-orange px-3 py-2 text-uppercase tracking-wide rounded-0">01</span>
+                            <i class="fa-solid fa-oil-well fs-1 text-white opacity-50"></i>
                         </div>
-                        <div class="sector-overlay position-absolute bottom-0 start-0 w-100 p-4 bg-gradient-dark">
-                            <h4 class="text-white fw-bold text-uppercase mb-0">Oil & Gas</h4>
-                            <p class="text-orange fw-semibold mb-0 mt-2">Upstream & Downstream</p>
+                        <div class="mt-5">
+                            <h3 class="display-6 fw-bold text-white mb-2">Oil & Gas</h3>
+                            <p class="text-white opacity-75 fs-5 mb-0">Upstream & Downstream Infrastructure</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="sector-card position-relative overflow-hidden h-100">
-                        <div class="sector-img bg-secondary"
-                            style="height: 350px; background-image: url('https://images.unsplash.com/photo-1703226741497-6de4f67c6e11?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
-                        </div>
-                        <div class="sector-overlay position-absolute bottom-0 start-0 w-100 p-4 bg-gradient-dark">
-                            <h4 class="text-white fw-bold text-uppercase mb-0">Marine & Offshore</h4>
-                            <p class="text-orange fw-semibold mb-0 mt-2">Vessels & Logistics</p>
+
+                <div class="bento-item bento-span-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="bento-img-bg"
+                        style="background-image: url('https://images.unsplash.com/photo-1703226741497-6de4f67c6e11?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                    </div>
+                    <div class="bento-overlay"></div>
+                    <div class="bento-content">
+                        <span
+                            class="badge bg-orange px-3 py-2 text-uppercase tracking-wide rounded-0 align-self-start">02</span>
+                        <div class="mt-4">
+                            <h4 class="fw-bold text-white mb-1">Marine & Offshore</h4>
+                            <p class="text-white opacity-75 mb-0">Vessels & Logistics</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="sector-card position-relative overflow-hidden h-100">
-                        <div class="sector-img bg-dark"
-                            style="height: 350px; background-image: url('https://images.unsplash.com/photo-1576577610667-c9ea0ac983fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+
+                <div class="bento-item bento-span-4 bg-secondary-grey" data-aos="fade-up" data-aos-delay="300">
+                    <div class="bento-content text-white p-5 justify-content-center align-items-center text-center">
+                        <h2 class="display-3 fw-bold text-orange mb-0">15+</h2>
+                        <p class="text-uppercase tracking-widest opacity-75 mt-2">Years of Excellence</p>
+                    </div>
+                </div>
+
+                <div class="bento-item bento-span-8" data-aos="fade-up" data-aos-delay="400">
+                    <div class="bento-img-bg"
+                        style="background-image: url('https://images.unsplash.com/photo-1576577610667-c9ea0ac983fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');">
+                    </div>
+                    <div class="bento-overlay"></div>
+                    <div class="bento-content">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <span class="badge bg-orange px-3 py-2 text-uppercase tracking-wide rounded-0">03</span>
+                            <i class="fa-solid fa-city fs-1 text-white opacity-50"></i>
                         </div>
-                        <div class="sector-overlay position-absolute bottom-0 start-0 w-100 p-4 bg-gradient-dark">
-                            <h4 class="text-white fw-bold text-uppercase mb-0">Heavy Industry</h4>
-                            <p class="text-orange fw-semibold mb-0 mt-2">Civil & Structural Build</p>
+                        <div class="mt-5">
+                            <h3 class="display-6 fw-bold text-white mb-2">Heavy Industry</h3>
+                            <p class="text-white opacity-75 fs-5 mb-0">Civil & Structural Build</p>
                         </div>
                     </div>
                 </div>
@@ -176,211 +803,207 @@
 
     <section id="services" class="py-5 bg-white">
         <div class="container py-5">
-            <div class="text-center mb-5" data-aos="fade-up">
-                <h6 class="text-orange fw-bold text-uppercase mb-2">Core Capabilities</h6>
-                <h2 class="display-5 fw-bold text-charcoal text-uppercase">Multi-Sector Expertise</h2>
+            <div class="row mb-5 align-items-end" data-aos="fade-up">
+                <div class="col-lg-8">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div style="width: 50px; height: 2px; background: var(--orange);"></div>
+                        <h6 class="text-orange fw-bold text-uppercase mb-0 tracking-wide">Capabilities</h6>
+                    </div>
+                    <h2 class="display-5 fw-bold text-primary-grey mb-3">Multi-Sector Expertise</h2>
+                    <p class="text-secondary-grey fs-5 mb-0" style="max-width: 750px;">Our expertise traverses a diverse
+                        spectrum, providing end-to-end industrial solutions from heavy-duty fabrication to complex
+                        subsea procurement.</p>
+                </div>
+                <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
+                    <a href="#" class="btn-custom btn-custom-outline text-decoration-none d-inline-flex">Download
+                        Brochure</a>
+                </div>
             </div>
 
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                    <div
-                        class="service-card p-5 bg-offwhite h-100 border-top border-4 border-transparent hover-border-orange transition-all shadow-sm">
-                        <i class="fa-solid fa-compass-drafting fa-2x text-charcoal mb-4 icon-transition"></i>
-                        <h4 class="fw-bold text-uppercase">Engineering</h4>
-                        <p class="text-secondary mb-0">Heavy-duty onshore and offshore platform structures, liquefied
-                            gas tanks, and facility design.</p>
+                    <div class="bento-item service-card-interactive h-100 p-5 bg-soft shadow-sm">
+                        <i class="fa-solid fa-compass-drafting fa-2x text-primary-grey mb-4 icon-transition"></i>
+                        <h4 class="fw-bold text-primary-grey mb-3">Engineering & Fabrication</h4>
+                        <p class="text-secondary-grey mb-0">Heavy-duty onshore and offshore platform structures,
+                            liquefied gas tanks, and detailed facility design.</p>
                     </div>
                 </div>
+
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="150">
+                    <div class="bento-item service-card-interactive h-100 p-5 bg-soft shadow-sm">
+                        <i class="fa-solid fa-boxes-stacked fa-2x text-primary-grey mb-4 icon-transition"></i>
+                        <h4 class="fw-bold text-primary-grey mb-3">Global Procurement</h4>
+                        <p class="text-secondary-grey mb-0">Sourcing subsea pipes, gas turbine compressors, ATEX control
+                            panels, and critical marine engine spares.</p>
+                    </div>
+                </div>
+
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                    <div
-                        class="service-card p-5 bg-charcoal text-white h-100 border-top border-4 border-transparent hover-border-orange transition-all shadow-sm">
-                        <i class="fa-solid fa-boxes-stacked fa-2x text-orange mb-4 icon-transition"></i>
-                        <h4 class="fw-bold text-uppercase">Procurement</h4>
-                        <p class="text-light mb-0">Sourcing subsea pipes, gas turbine compressors, ATEX control panels,
-                            and marine engine spares.</p>
+                    <div class="bento-item service-card-interactive h-100 p-5 bg-soft shadow-sm">
+                        <i class="fa-solid fa-helmet-safety fa-2x text-primary-grey mb-4 icon-transition"></i>
+                        <h4 class="fw-bold text-primary-grey mb-3">Construction & Install</h4>
+                        <p class="text-secondary-grey mb-0">Executing complex structural builds, scaffolding erection,
+                            and full installation and commissioning services.</p>
                     </div>
                 </div>
+
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="250">
+                    <div class="bento-item service-card-interactive h-100 p-5 bg-soft shadow-sm">
+                        <i class="fa-solid fa-ship fa-2x text-primary-grey mb-4 icon-transition"></i>
+                        <h4 class="fw-bold text-primary-grey mb-3">Marine & Haulage</h4>
+                        <p class="text-secondary-grey mb-0">Marine haulage, deployment of tug boats, barges, and
+                            strategic land haulage for industrial materials.</p>
+                    </div>
+                </div>
+
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                    <div
-                        class="service-card p-5 bg-offwhite h-100 border-top border-4 border-transparent hover-border-orange transition-all shadow-sm">
-                        <i class="fa-solid fa-helmet-safety fa-2x text-charcoal mb-4 icon-transition"></i>
-                        <h4 class="fw-bold text-uppercase">Construction</h4>
-                        <p class="text-secondary mb-0">Executing complex structural builds, scaffolding, installation,
-                            and commissioning services.</p>
+                    <div class="bento-item service-card-interactive h-100 p-5 bg-soft shadow-sm">
+                        <i class="fa-solid fa-wrench fa-2x text-primary-grey mb-4 icon-transition"></i>
+                        <h4 class="fw-bold text-primary-grey mb-3">Maintenance & Leasing</h4>
+                        <p class="text-secondary-grey mb-0">Valve repairs, pump calibration, tank cleaning, alongside
+                            leasing of cranes, excavators, and welding machines.</p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-                    <div
-                        class="service-card p-5 bg-offwhite h-100 border-top border-4 border-transparent hover-border-orange transition-all shadow-sm">
-                        <i class="fa-solid fa-ship fa-2x text-charcoal mb-4 icon-transition"></i>
-                        <h4 class="fw-bold text-uppercase">Marine & Logistics</h4>
-                        <p class="text-secondary mb-0">Marine haulage, tug boats, barges, and heavy equipment leasing
-                            for complex environments.</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-                    <div
-                        class="service-card p-5 bg-offwhite h-100 border-top border-4 border-transparent hover-border-orange transition-all shadow-sm">
-                        <i class="fa-solid fa-wrench fa-2x text-charcoal mb-4 icon-transition"></i>
-                        <h4 class="fw-bold text-uppercase">Maintenance</h4>
-                        <p class="text-secondary mb-0">Valve repairs, pump calibration, tank cleaning, and
-                            mechanical/electrical rehabilitation.</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
-                    <div
-                        class="service-card p-5 bg-charcoal text-white h-100 border-top border-4 border-transparent hover-border-orange transition-all shadow-sm">
-                        <i class="fa-solid fa-users-gear fa-2x text-orange mb-4 icon-transition"></i>
-                        <h4 class="fw-bold text-uppercase">Manpower & Safety</h4>
-                        <p class="text-light mb-0">Training, development, lifting gears, and comprehensive PPE supplies
-                            for safe operations.</p>
+
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="350">
+                    <div class="bento-item service-card-interactive h-100 p-5 bg-soft shadow-sm">
+                        <i class="fa-solid fa-users-gear fa-2x text-primary-grey mb-4 icon-transition"></i>
+                        <h4 class="fw-bold text-primary-grey mb-3">Manpower & Safety</h4>
+                        <p class="text-secondary-grey mb-0">Provision of skilled manpower, operational training, lifting
+                            gears, and comprehensive PPE supplies.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="projects" class="py-5 bg-charcoal bg-animated-grid">
+    <section id="projects" class="py-5 bg-primary-grey text-white bg-animated-grid">
         <div class="container py-5">
-            <div class="row align-items-end mb-5" data-aos="fade-up">
-                <div class="col-md-8">
-                    <h6 class="text-orange fw-bold text-uppercase mb-2">Visual Proof</h6>
-                    <h2 class="display-5 fw-bold text-white text-uppercase mb-0">Gallery</h2>
+            <div class="d-flex justify-content-between align-items-end mb-5" data-aos="fade-up">
+                <div>
+                    <h6 class="text-orange fw-bold text-uppercase mb-2 tracking-wide">Visual Proof</h6>
+                    <h2 class="display-5 fw-bold mb-0">Gallery</h2>
                 </div>
-                <div class="col-md-4 text-md-end mt-4 mt-md-0 d-none d-md-block">
-                    <a href="projects.html"
-                        class="text-white fw-bold text-uppercase text-decoration-none border-bottom border-2 border-orange pb-1 hover-text-orange transition-all">View
-                        Full Portfolio <i class="fa-solid fa-arrow-right ms-2"></i></a>
-                </div>
+                <a href="#"
+                    class="d-none d-md-block text-white text-uppercase tracking-wide text-decoration-none border-bottom border-orange pb-1">View
+                    Full Portfolio</a>
             </div>
 
-            <div class="row g-4 mb-5">
-                <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="gallery-item position-relative overflow-hidden bg-dark">
-                        <div class="gallery-img"
-                            style="background-image: url('https://images.unsplash.com/photo-1508450859948-4e04fabaa4ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
-                        </div>
-                        <div
-                            class="gallery-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-end p-4">
-                            <span class="badge bg-orange align-self-start mb-2 rounded-0">Construction</span>
-                            <h4 class="text-white fw-bold text-uppercase mb-0">Structural Civil Build</h4>
-                        </div>
+            <div class="bento-container">
+                <div class="bento-item bento-span-4" style="height: 350px;" data-aos="zoom-in">
+                    <div class="bento-img-bg"
+                        style="background-image: url('https://images.unsplash.com/photo-1764835746713-34a671e73569?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                    </div>
+                    <div class="bento-overlay"></div>
+                    <div class="bento-content justify-content-end p-4">
+                        <h5 class="text-white fw-bold text-uppercase mb-1">Offshore Deployment</h5>
+                        <p class="text-orange text-uppercase tracking-wide fs-7 mb-0">Marine Logistics</p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="gallery-item position-relative overflow-hidden bg-dark">
-                        <div class="gallery-img"
-                            style="background-image: url('https://images.unsplash.com/photo-1764835746713-34a671e73569?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
-                        </div>
-                        <div
-                            class="gallery-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-end p-4">
-                            <span class="badge bg-orange align-self-start mb-2 rounded-0">Pipes</span>
-                            <h4 class="text-white fw-bold text-uppercase mb-0">Offshore Vessel Deployment</h4>
-                        </div>
+                <div class="bento-item bento-span-8" style="height: 350px;" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="bento-img-bg"
+                        style="background-image: url('https://images.unsplash.com/photo-1603814744247-ca3e77714471?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');">
+                    </div>
+                    <div class="bento-overlay"></div>
+                    <div class="bento-content justify-content-end p-4">
+                        <h5 class="text-white fw-bold text-uppercase mb-1">Structural Civil Build</h5>
+                        <p class="text-orange text-uppercase tracking-wide fs-7 mb-0">Construction</p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="gallery-item position-relative overflow-hidden bg-dark">
-                        <div class="gallery-img"
-                            style="background-image: url('https://images.unsplash.com/photo-1603814744247-ca3e77714471?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
-                        </div>
-                        <div
-                            class="gallery-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-end p-4">
-                            <span class="badge bg-orange align-self-start mb-2 rounded-0">Construction</span>
-                            <h4 class="text-white fw-bold text-uppercase mb-0">Structural Civil Build</h4>
-                        </div>
+                <div class="bento-item bento-span-6" style="height: 350px;" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="bento-img-bg"
+                        style="background-image: url('https://images.unsplash.com/photo-1673662686870-33f0b8864f5e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                    </div>
+                    <div class="bento-overlay"></div>
+                    <div class="bento-content justify-content-end p-4">
+                        <h5 class="text-white fw-bold text-uppercase mb-1">Heavy Valve Calibration</h5>
+                        <p class="text-orange text-uppercase tracking-wide fs-7 mb-0">Maintenance</p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
-                    <div class="gallery-item position-relative overflow-hidden bg-dark">
-                        <div class="gallery-img"
-                            style="background-image: url('https://images.unsplash.com/photo-1673662686870-33f0b8864f5e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
-                        </div>
-                        <div
-                            class="gallery-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-end p-4">
-                            <span class="badge bg-orange align-self-start mb-2 rounded-0">Maintenance</span>
-                            <h4 class="text-white fw-bold text-uppercase mb-0">Heavy Valve Calibration</h4>
-                        </div>
+                <div class="bento-item bento-span-6" style="height: 350px;" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="bento-img-bg"
+                        style="background-image: url('https://images.unsplash.com/photo-1636362556682-11231883c01c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="500">
-                    <div class="gallery-item position-relative overflow-hidden bg-dark">
-                        <div class="gallery-img"
-                            style="background-image: url('https://images.unsplash.com/photo-1636362556682-11231883c01c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
-                        </div>
-                        <div
-                            class="gallery-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-end p-4">
-                            <span class="badge bg-orange align-self-start mb-2 rounded-0">Procurement</span>
-                            <h4 class="text-white fw-bold text-uppercase mb-0">Scaffolding</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="600">
-                    <div class="gallery-item position-relative overflow-hidden bg-dark">
-                        <div class="gallery-img"
-                            style="background-image: url('https://images.unsplash.com/photo-1621298516851-047f72b40bd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
-                        </div>
-                        <div
-                            class="gallery-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-end p-4">
-                            <span class="badge bg-orange align-self-start mb-2 rounded-0">Engineering</span>
-                            <h4 class="text-white fw-bold text-uppercase mb-0">Lifting Gear
-                            </h4>
-                        </div>
+                    <div class="bento-overlay"></div>
+                    <div class="bento-content justify-content-end p-4">
+                        <h5 class="text-white fw-bold text-uppercase mb-1">Scaffolding Installation</h5>
+                        <p class="text-orange text-uppercase tracking-wide fs-7 mb-0">Engineering</p>
                     </div>
                 </div>
             </div>
 
-            <div class="text-center mt-5" data-aos="fade-up">
-                <a href="projects.html"
-                    class="btn btn-outline-light rounded-0 btn-lg px-5 py-3 text-uppercase fw-bold">Explore All Projects
-                    <i class="fa-solid fa-arrow-right ms-2"></i></a>
+            <div class="text-center mt-5 d-md-none" data-aos="fade-up">
+                <a href="#" class="btn-custom btn-custom-orange text-decoration-none">Explore Projects</a>
             </div>
         </div>
     </section>
 
-    <section class="py-5 bg-white">
-        <div class="container py-5">
+    <section class="py-5 bg-soft">
+        <div class="container py-5 my-lg-4">
             <div class="row align-items-center g-5">
-                <div class="col-lg-5" data-aos="fade-right">
-                    <h6 class="text-orange fw-bold text-uppercase mb-2">The VT Edge</h6>
-                    <h2 class="display-5 fw-bold text-charcoal text-uppercase mb-4">Why Global Clients Trust Us</h2>
-                    <p class="lead text-secondary mb-4">We don't just supply services; we supply certainty. VROI-TREZ
-                        Energies is built on a foundation of unyielding standards and rapid execution.</p>
-                    <a href="#" class="btn btn-orange rounded-0 btn-lg px-4 py-3 text-uppercase fw-bold">Download
-                        Company Profile</a>
+                <div class="col-lg-5 pe-lg-4" data-aos="fade-right">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div style="width: 50px; height: 2px; background: var(--orange);"></div>
+                        <h6 class="text-orange fw-bold text-uppercase mb-0 tracking-wide">The VT Edge</h6>
+                    </div>
+                    <h2 class="display-5 fw-bold text-primary-grey mb-4">Why Global Clients Trust Us</h2>
+                    <p class="text-secondary-grey fs-5 mb-5">We don't just supply services; we supply certainty.
+                        VROI-TREZ Energies is built on a foundation of unyielding standards, certified execution, and
+                        rapid deployment.</p>
+                    <a href="#" class="btn-custom btn-custom-orange text-decoration-none shadow-sm">Check out our services</a>
                 </div>
+
                 <div class="col-lg-7">
                     <div class="row g-4">
                         <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-                            <div class="bg-offwhite p-4 border-start border-4 border-orange h-100 shadow-sm">
-                                <i class="fa-solid fa-users-viewfinder fa-2x text-orange mb-3"></i>
-                                <h5 class="fw-bold text-uppercase text-charcoal">Certified Manpower</h5>
-                                <p class="text-secondary mb-0">Our workforce undergoes rigorous training and assessment
-                                    to ensure flawless execution in high-risk environments.</p>
+                            <div class="bento-item p-4 h-100 bg-white shadow-sm border-start border-4 border-orange">
+                                <div class="bg-soft rounded-circle d-inline-flex align-items-center justify-content-center mb-4"
+                                    style="width: 60px; height: 60px;">
+                                    <i class="fa-solid fa-users-viewfinder fs-4 text-orange"></i>
+                                </div>
+                                <h5 class="fw-bold text-primary-grey mb-3">Certified Manpower</h5>
+                                <p class="text-secondary-grey fs-6 mb-0">Rigorous training and assessment ensure
+                                    flawless execution in high-risk environments.</p>
                             </div>
                         </div>
+
                         <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
-                            <div class="bg-offwhite p-4 border-start border-4 border-charcoal h-100 shadow-sm">
-                                <i class="fa-solid fa-globe fa-2x text-charcoal mb-3"></i>
-                                <h5 class="fw-bold text-uppercase text-charcoal">Global Standards</h5>
-                                <p class="text-secondary mb-0">We align strictly with international best practices,
-                                    ensuring your projects meet all regulatory and compliance metrics.</p>
+                            <div
+                                class="bento-item p-4 h-100 bg-white shadow-sm border-start border-4 border-transparent hover-border-orange transition-all">
+                                <div class="bg-soft rounded-circle d-inline-flex align-items-center justify-content-center mb-4"
+                                    style="width: 60px; height: 60px;">
+                                    <i class="fa-solid fa-globe fs-4 text-orange"></i>
+                                </div>
+                                <h5 class="fw-bold text-primary-grey mb-3">Global Standards</h5>
+                                <p class="text-secondary-grey fs-6 mb-0">Strict alignment with international best
+                                    practices for regulatory compliance.</p>
                             </div>
                         </div>
+
                         <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
-                            <div class="bg-offwhite p-4 border-start border-4 border-charcoal h-100 shadow-sm">
-                                <i class="fa-solid fa-truck-fast fa-2x text-charcoal mb-3"></i>
-                                <h5 class="fw-bold text-uppercase text-charcoal">Rapid Deployment</h5>
-                                <p class="text-secondary mb-0">With our own fleets and heavy equipment, we mobilize to
-                                    site faster than competitors relying solely on third parties.</p>
+                            <div
+                                class="bento-item p-4 h-100 bg-white shadow-sm border-start border-4 border-transparent hover-border-orange transition-all">
+                                <div class="bg-soft rounded-circle d-inline-flex align-items-center justify-content-center mb-4"
+                                    style="width: 60px; height: 60px;">
+                                    <i class="fa-solid fa-truck-fast fs-4 text-orange"></i>
+                                </div>
+                                <h5 class="fw-bold text-primary-grey mb-3">Rapid Deployment</h5>
+                                <p class="text-secondary-grey fs-6 mb-0">Dedicated fleets and equipment allow us to
+                                    mobilize to site faster than competitors.</p>
                             </div>
                         </div>
+
                         <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
-                            <div class="bg-offwhite p-4 border-start border-4 border-orange h-100 shadow-sm">
-                                <i class="fa-solid fa-shield-halved fa-2x text-orange mb-3"></i>
-                                <h5 class="fw-bold text-uppercase text-charcoal">Risk Mitigation</h5>
-                                <p class="text-secondary mb-0">Proactive safety auditing and zero-harm policies ensure
-                                    your assets and our personnel are protected 24/7.</p>
+                            <div
+                                class="bento-item p-4 h-100 bg-white shadow-sm border-start border-4 border-transparent hover-border-orange transition-all">
+                                <div class="bg-soft rounded-circle d-inline-flex align-items-center justify-content-center mb-4"
+                                    style="width: 60px; height: 60px;">
+                                    <i class="fa-solid fa-shield-halved fs-4 text-orange"></i>
+                                </div>
+                                <h5 class="fw-bold text-primary-grey mb-3">Risk Mitigation</h5>
+                                <p class="text-secondary-grey fs-6 mb-0">Proactive safety auditing and zero-harm
+                                    policies protect your assets 24/7.</p>
                             </div>
                         </div>
                     </div>
@@ -391,70 +1014,70 @@
 
     <section class="py-5 bg-orange text-white">
         <div class="container py-4">
-            <div class="row align-items-center">
+            <div class="row align-items-center g-4">
                 <div class="col-lg-8" data-aos="fade-right">
+                    <div class="d-flex align-items-center gap-3 mb-2">
+                        <div style="width: 30px; height: 2px; background: var(--white);"></div>
+                        <span class="text-uppercase tracking-widest fw-bold text-white fs-7">Safety First</span>
+                    </div>
                     <h2 class="display-5 fw-bold text-uppercase mb-3">Our Zero Harm Commitment</h2>
-                    <p class="lead mb-0 w-85 text-white">We strictly adhere to HSE policies, preventing injury,
+                    <p class="fs-5 mb-0 opacity-75 pe-lg-5">We strictly adhere to HSE policies, preventing injury,
                         preserving health, and minimizing environmental impact across all operational sites. Safety is
                         not optional; it is fundamental.</p>
                 </div>
-                <div class="col-lg-4 text-lg-end mt-4 mt-lg-0" data-aos="fade-left">
-                    <a href="#" class="btn btn-charcoal rounded-0 btn-lg px-5 py-3 text-uppercase fw-bold">Read HSE
-                        Policy</a>
+                <div class="col-lg-4 text-lg-end" data-aos="fade-left">
+                    <a href="#" class="btn-custom btn-custom-outline text-decoration-none">Read HSE Policy</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="py-5 bg-offwhite">
+    <section class="py-5 bg-light-grey">
         <div class="container my-5">
             <div class="row mb-5">
                 <div class="col-lg-6" data-aos="fade-right">
-                    <h6 class="text-orange fw-bold text-uppercase mb-2">Process Integrity</h6>
-                    <h2 class="display-5 fw-bold text-charcoal text-uppercase">The Operational Flow</h2>
+                    <h6 class="text-orange fw-bold text-uppercase mb-2 tracking-wide">Process Integrity</h6>
+                    <h2 class="display-5 fw-bold text-primary-grey text-uppercase">The Operational Flow</h2>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-lg-8 position-relative">
                     <div class="pipeline-track position-absolute top-0 bottom-0 ms-4"
-                        style="width: 4px; background-color: #ddd; left: 10px; z-index: 1;">
+                        style="width: 4px; background-color: var(--white); left: 10px; z-index: 1;">
                         <div class="pipeline-fill bg-orange"
                             style="width: 100%; height: 0%; transition: height 1s ease-out;"></div>
                     </div>
 
                     <div class="pipeline-steps">
-                        <div class="d-flex align-items-start mb-5 position-relative z-index-2" data-aos="fade-left"
+                        <div class="d-flex align-items-start mb-5 position-relative z-index-2" data-aos="fade-up"
                             data-aos-offset="100">
-                            <div class="step-node bg-charcoal rounded-circle border border-4 border-white mt-1 me-4 d-flex justify-content-center align-items-center transition-all"
+                            <div class="step-node bg-white rounded-circle border border-4 border-light mt-3 me-4 d-flex justify-content-center align-items-center transition-all"
                                 style="width: 24px; height: 24px;"></div>
-                            <div
-                                class="bg-white p-4 w-100 shadow-sm border-start border-4 border-transparent hover-border-orange transition-all">
-                                <h4 class="fw-bold text-uppercase text-charcoal">1. Strategic Procurement</h4>
-                                <p class="text-secondary mb-0">Sourcing subsea pipes, turbine compressors, and heavy
-                                    materials with exact specifications.</p>
+                            <div class="bento-item p-4 w-100 transition-all shadow-sm">
+                                <h4 class="fw-bold text-uppercase text-primary-grey">1. Strategic Procurement</h4>
+                                <p class="text-secondary-grey mb-0">Sourcing subsea pipes, turbine compressors, and
+                                    heavy materials with exact specifications.</p>
                             </div>
                         </div>
-                        <div class="d-flex align-items-start mb-5 position-relative z-index-2" data-aos="fade-left"
+                        <div class="d-flex align-items-start mb-5 position-relative z-index-2" data-aos="fade-up"
                             data-aos-offset="200">
-                            <div class="step-node bg-charcoal rounded-circle border border-4 border-white mt-1 me-4 d-flex justify-content-center align-items-center transition-all"
+                            <div class="step-node bg-white rounded-circle border border-4 border-light mt-3 me-4 d-flex justify-content-center align-items-center transition-all"
                                 style="width: 24px; height: 24px;"></div>
-                            <div
-                                class="bg-white p-4 w-100 shadow-sm border-start border-4 border-transparent hover-border-orange transition-all">
-                                <h4 class="fw-bold text-uppercase text-charcoal">2. Precision Engineering</h4>
-                                <p class="text-secondary mb-0">Designing pipeline systems, offshore structures, and
+                            <div class="bento-item p-4 w-100 transition-all shadow-sm">
+                                <h4 class="fw-bold text-uppercase text-primary-grey">2. Precision Engineering</h4>
+                                <p class="text-secondary-grey mb-0">Designing pipeline systems, offshore structures, and
                                     fluid dynamics solutions.</p>
                             </div>
                         </div>
-                        <div class="d-flex align-items-start position-relative z-index-2" data-aos="fade-left"
+                        <div class="d-flex align-items-start position-relative z-index-2" data-aos="fade-up"
                             data-aos-offset="300">
-                            <div class="step-node bg-charcoal rounded-circle border border-4 border-white mt-1 me-4 d-flex justify-content-center align-items-center transition-all"
+                            <div class="step-node bg-white rounded-circle border border-4 border-light mt-3 me-4 d-flex justify-content-center align-items-center transition-all"
                                 style="width: 24px; height: 24px;"></div>
-                            <div
-                                class="bg-white p-4 w-100 shadow-sm border-start border-4 border-transparent hover-border-orange transition-all">
-                                <h4 class="fw-bold text-uppercase text-charcoal">3. Fabrication & Construction</h4>
-                                <p class="text-secondary mb-0">Heavy-duty welding, scaffolding, and structural builds
-                                    executed by certified manpower.</p>
+                            <div class="bento-item p-4 w-100 transition-all shadow-sm">
+                                <h4 class="fw-bold text-uppercase text-primary-grey">3. Execution & Maintenance</h4>
+                                <p class="text-secondary-grey mb-0">Heavy-duty welding, structural builds, and ongoing
+                                    mechanical rehabilitation.</p>
                             </div>
                         </div>
                     </div>
@@ -463,58 +1086,62 @@
         </div>
     </section>
 
-    <section id="contact" class="py-5 position-relative bg-charcoal text-white text-center bg-animated-grid">
-        <div class="container py-5 my-3 position-relative z-index-2">
+    <section id="contact-cta" class="py-5 position-relative bg-primary-grey text-white bg-animated-grid border-bottom"
+        style="border-color: rgba(255,255,255,0.1) !important;">
+        <div class="container py-5 my-4 position-relative z-index-2 text-center">
             <h2 class="display-4 fw-bold text-uppercase mb-4" data-aos="fade-up">Ready To Start Your Next Project?</h2>
-            <p class="lead text-gray mb-5 mx-auto" style="max-width: 600px;" data-aos="fade-up" data-aos-delay="100">
+            <p class="fs-5 text-white opacity-75 mb-5 mx-auto" style="max-width: 600px;" data-aos="fade-up"
+                data-aos-delay="100">
                 Partner with VT Energies for reliable, top-tier engineering and industrial solutions. Let's build what
                 matters.
             </p>
-            <a href="contact.html" class="btn btn-orange rounded-0 btn-lg px-5 py-3 text-uppercase fw-bold shadow-lg"
-                data-aos="fade-up" data-aos-delay="200">Request A Consultation</a>
+            <div data-aos="fade-up" data-aos-delay="200">
+                <a href="#contact" class="btn-custom btn-custom-orange text-decoration-none px-5 py-3 shadow-lg">Request
+                    A Consultation</a>
+            </div>
         </div>
     </section>
 
-    <footer class="bg-dark text-light pt-5 pb-3">
+    <footer id="contact" class="bg-secondary-grey text-white pt-5">
         <div class="container py-5">
             <div class="row g-5">
-                <div class="col-lg-4">
-                    <a class="navbar-brand fw-bold text-uppercase fs-3 mb-4 d-block" href="#">
-                        <img src="assets/img/logo.png" alt="AI Media Logo" height="55">
+                <div class="col-lg-4 pe-lg-5">
+                    <a class="navbar-brand fw-bold text-uppercase fs-4 mb-4 d-block" href="#">
+                        <img src="assets/img/logo.png" alt="VT Energies Logo" height="45">
                     </a>
-                    <p class="text-gray mb-4 pe-lg-4">Your best solution partners. Providing complete value through
-                        top-quality EPC services, marine logistics, and industrial maintenance.</p>
+                    <p class="text-white opacity-75 mb-4 pe-lg-3">Your best solution partners. Providing complete value
+                        through top-quality EPC services, marine logistics, and industrial maintenance.</p>
                     <div class="d-flex gap-3">
-                        <a href="#" class="text-white fs-5 hover-text-orange transition-all"><i
+                        <a href="#" class="text-white fs-5 opacity-75 hover-opacity-100 transition-all"><i
                                 class="fa-brands fa-linkedin"></i></a>
-                        <a href="#" class="text-white fs-5 hover-text-orange transition-all"><i
+                        <a href="#" class="text-white fs-5 opacity-75 hover-opacity-100 transition-all"><i
                                 class="fa-brands fa-twitter"></i></a>
-                        <a href="#" class="text-white fs-5 hover-text-orange transition-all"><i
+                        <a href="#" class="text-white fs-5 opacity-75 hover-opacity-100 transition-all"><i
                                 class="fa-brands fa-facebook"></i></a>
                     </div>
                 </div>
+
                 <div class="col-lg-2 col-md-6">
-                    <h5 class="text-uppercase fw-bold text-white mb-4">Company</h5>
+                    <h5 class="text-uppercase fw-bold text-white mb-4 tracking-wide fs-6">Company</h5>
                     <ul class="list-unstyled">
                         <li class="mb-2"><a href="#about"
-                                class="text-gray text-decoration-none hover-text-orange transition-all">About Us</a>
-                        </li>
+                                class="text-white opacity-75 text-decoration-none hover-text-orange transition-all">About
+                                Us</a></li>
                         <li class="mb-2"><a href="#projects"
-                                class="text-gray text-decoration-none hover-text-orange transition-all">Projects</a>
-                        </li>
+                                class="text-white opacity-75 text-decoration-none hover-text-orange transition-all">Projects
+                                Gallery</a></li>
                         <li class="mb-2"><a href="#"
-                                class="text-gray text-decoration-none hover-text-orange transition-all">HSE Policy</a>
-                        </li>
+                                class="text-white opacity-75 text-decoration-none hover-text-orange transition-all">HSE
+                                Policy</a></li>
                         <li class="mb-2"><a href="#"
-                                class="text-gray text-decoration-none hover-text-orange transition-all">Nigerian
+                                class="text-white opacity-75 text-decoration-none hover-text-orange transition-all">Nigerian
                                 Content</a></li>
-                        <li class="mb-2"><a href="#contact"
-                                class="text-gray text-decoration-none hover-text-orange transition-all">Contact</a></li>
                     </ul>
                 </div>
+
                 <div class="col-lg-3 col-md-6">
-                    <h5 class="text-uppercase fw-bold text-white mb-4">Operations</h5>
-                    <ul class="list-unstyled text-gray">
+                    <h5 class="text-uppercase fw-bold text-white mb-4 tracking-wide fs-6">Operations</h5>
+                    <ul class="list-unstyled text-white opacity-75">
                         <li class="mb-3 d-flex align-items-start">
                             <i class="fa-solid fa-location-dot mt-1 me-3 text-orange"></i>
                             <span><strong>Head Office:</strong> GV45, Close 6 Green Village Estate, Elelewon/Akpajo,
@@ -527,24 +1154,29 @@
                         </li>
                     </ul>
                 </div>
+
                 <div class="col-lg-3">
-                    <h5 class="text-uppercase fw-bold text-white mb-4">Contact Us</h5>
-                    <ul class="list-unstyled text-gray mb-4">
+                    <h5 class="text-uppercase fw-bold text-white mb-4 tracking-wide fs-6">Contact Us</h5>
+                    <ul class="list-unstyled text-white opacity-75 mb-4">
                         <li class="mb-2"><i class="fa-solid fa-phone me-2 text-orange"></i> 08038326700</li>
                         <li class="mb-2"><i class="fa-solid fa-phone me-2 text-orange"></i> 08075089171</li>
-                        <li class="mb-2"><i class="fa-solid fa-envelope me-2 text-orange"></i>
+                        <li class="mb-2 mt-3"><i class="fa-solid fa-envelope me-2 text-orange"></i>
                             vroitrezenergies@gmail.com</li>
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="container border-top border-secondary pt-4 mt-2">
-            <div class="row text-center text-md-start">
-                <div class="col-md-6 text-gray" style="font-size: 0.85rem;">
-                    &copy; 2026 VROI-TREZ Energies Limited (RC 7025466). All Rights Reserved.
-                </div>
-                <div class="col-md-6 text-md-end text-gray mt-3 mt-md-0" style="font-size: 0.85rem;">
-                    Designed for Industrial Precision.
+
+        <div class="border-top border-secondary mt-2">
+            <div class="container py-4">
+                <div class="row align-items-center">
+                    <div class="col-md-6 text-white opacity-50" style="font-size: 0.85rem;">
+                        &copy; 2026 VROI-TREZ Energies Limited (RC 7025466).
+                    </div>
+                    <div class="col-md-6 text-md-end text-white opacity-50 fw-medium text-uppercase tracking-wide mt-3 mt-md-0"
+                        style="font-size: 0.75rem;">
+                        Designed with Architectural Precision
+                    </div>
                 </div>
             </div>
         </div>
@@ -552,7 +1184,62 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // 1. Initialize AOS
+            AOS.init({
+                once: true,
+                offset: 50,
+                duration: 900,
+                easing: 'ease-out-quart',
+            });
+
+            // 2. Glassmorphism Navbar Scroll Effect
+            const navbar = document.getElementById('mainNav');
+            const toggleColorText = document.querySelectorAll('.toggle-text');
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                    toggleColorText.forEach(el => {
+                        el.classList.remove('text-white');
+                        el.classList.add('text-primary-grey');
+                    });
+                } else {
+                    navbar.classList.remove('scrolled');
+                    toggleColorText.forEach(el => {
+                        el.classList.remove('text-primary-grey');
+                        el.classList.add('text-white');
+                    });
+                }
+            });
+
+            // 3. Operational Flow Pipeline Fill Effect
+            const pipelineFill = document.querySelector('.pipeline-fill');
+            const pipelineSteps = document.querySelector('.pipeline-steps');
+
+            if (pipelineSteps && pipelineFill) {
+                window.addEventListener('scroll', () => {
+                    const rect = pipelineSteps.getBoundingClientRect();
+                    const scrollPercentage = Math.max(0, Math.min(100, ((window.innerHeight / 1.5 - rect.top) / rect.height) * 100));
+
+                    pipelineFill.style.height = `${scrollPercentage}%`;
+
+                    const nodes = document.querySelectorAll('.step-node');
+                    nodes.forEach((node) => {
+                        const nodeRect = node.getBoundingClientRect();
+                        if (window.innerHeight / 1.5 > nodeRect.top) {
+                            node.classList.remove('bg-white', 'border-light');
+                            node.classList.add('bg-orange', 'border-orange');
+                        } else {
+                            node.classList.remove('bg-orange', 'border-orange');
+                            node.classList.add('bg-white', 'border-light');
+                        }
+                    });
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>
