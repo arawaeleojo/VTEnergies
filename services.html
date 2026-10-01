@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services | VT Energies</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        /* --- GLOBAL COLOR PALETTE --- */
+        :root {
+            --grey-900: #2b2e33; 
+            --grey-800: #3a3f45;
+            --grey-600: #6B7280;
+            --bg-soft: #F7F8FA; 
+            --grey-100: #Eef0f3;
+            --orange: #F05A28;
+            --white: #FFFFFF;
+            
+            --shadow-soft: 0 15px 35px rgba(43, 46, 51, 0.05);
+            --shadow-hover: 0 25px 50px rgba(43, 46, 51, 0.1);
+        }
+
+        html, body {
+            overflow-x: hidden !important;
+            width: 100%;
+            position: relative;
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--grey-900);
+            background-color: var(--bg-soft);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .text-primary-grey { color: var(--grey-900) !important; }
+        .text-secondary-grey { color: var(--grey-600) !important; }
+        .text-orange { color: var(--orange) !important; }
+        .bg-primary-grey { background-color: var(--grey-900) !important; }
+        .bg-secondary-grey { background-color: var(--grey-800) !important; }
+        .bg-orange { background-color: var(--orange) !important; }
+        .bg-light-grey { background-color: var(--grey-100) !important; }
+        .bg-white { background-color: var(--white) !important; }
+        .bg-soft { background-color: var(--bg-soft) !important; }
+
+        .tracking-wide { letter-spacing: 2px; }
+        .tracking-widest { letter-spacing: 4px; }
+
+        /* --- BUTTONS --- */
+        .btn-custom {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            overflow: hidden;
+            border: none;
+            transition: all 0.4s ease;
+            z-index: 1;
+        }
+        .btn-custom::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 0%; height: 100%;
+            background: var(--grey-900);
+            z-index: -1;
+            transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .btn-custom-orange { background: var(--orange); color: var(--white); }
+        .btn-custom-orange:hover { color: var(--white); }
+        .btn-custom-orange:hover::before { width: 100%; }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            padding: 1.5rem 0;
+            transition: all 0.4s ease;
+            background: transparent;
+        }
+        .navbar.scrolled {
+            background: rgba(247, 248, 250, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 0.8rem 0;
+            box-shadow: var(--shadow-soft);
+        }
+        /* Default state is white text because of dark hero */
+        .nav-link {
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin: 0 10px;
+            position: relative;
+            color: var(--white) !important;
+            transition: color 0.3s ease;
+        }
+        /* Scrolled state turns text dark grey */
+        .navbar.scrolled .nav-link { color: var(--grey-900) !important; }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background: var(--orange);
+            bottom: -5px; left: 50%;
+            transform: translateX(-50%) scale(0);
+            transition: transform 0.3s ease;
+        }
+        .nav-link:hover::after, .nav-link.active::after { transform: translateX(-50%) scale(1); }
+
+        /* --- INTERNAL PAGE HERO (DARK CINEMATIC PARALLAX) --- */
+        .page-hero {
+            padding-top: 180px;
+            padding-bottom: 120px;
+            position: relative;
+            z-index: 1;
+            background-image: linear-gradient(rgba(27, 29, 33, 0.9), rgba(43, 46, 51, 0.85)), url('https://images.unsplash.com/photo-1508450859948-4e04fabaa4ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .hero-bg-text {
+            position: absolute;
+            top: 45%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 14vw;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.04);
+            white-space: nowrap;
+            z-index: 0;
+            pointer-events: none;
+            letter-spacing: -5px;
+        }
+
+        /* --- DETAILED SERVICE BLOCKS --- */
+        .service-detail-block {
+            padding: 6rem 0;
+        }
+        
+        .bento-image-wrapper {
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            height: 100%;
+            min-height: 450px;
+        }
+        .bento-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            transition: transform 0.6s ease;
+        }
+        .bento-image-wrapper:hover img { transform: scale(1.05); }
+        
+        .service-badge {
+            position: absolute;
+            top: 2rem; left: -1rem;
+            background: var(--orange);
+            color: var(--white);
+            padding: 0.5rem 1.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            box-shadow: var(--shadow-soft);
+            z-index: 2;
+        }
+
+        /* Highly Compact Checkmark Lists for Large Datasets */
+        .feature-list {
+            padding-left: 0;
+        }
+        .feature-list li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 0.75rem;
+            color: var(--grey-600);
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+        .feature-list li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0; top: 3px;
+            color: var(--orange);
+            background: var(--grey-100);
+            width: 20px; height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6rem;
+        }
+
+        /* Dark Mode Checkmark List */
+        .feature-list-dark li { color: rgba(255, 255, 255, 0.8); }
+        .feature-list-dark li::before { background: var(--grey-800); color: var(--orange); }
+
+        /* Orange Mode Checkmark List */
+        .feature-list-orange li { color: rgba(255, 255, 255, 0.95); }
+        .feature-list-orange li::before { background: var(--white); color: var(--orange); }
+
+        /* Animated Blueprint Grid for Dark Sections */
+        .bg-animated-grid { position: relative; overflow: hidden; }
+        .bg-animated-grid::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%; 
+            width: 200%; height: 200%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: moveGrid 30s linear infinite;
+            z-index: 0;
+            pointer-events: none;
+        }
+        @keyframes moveGrid {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(60px, 60px); }
+        }
+        .bg-animated-grid > * { position: relative; z-index: 2; }
+
+        @media (max-width: 991px) {
+            .navbar.scrolled { background: var(--grey-900); }
+            .navbar.scrolled .nav-link, .navbar-toggler i { color: var(--grey-900) !important; }
+            .page-hero { padding-top: 140px; padding-bottom: 70px; }
+            .service-detail-block { padding: 4rem 0; }
+            .bento-image-wrapper { height: 350px; min-height: 350px; margin-bottom: 2rem; }
+            .service-badge { left: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-uppercase fs-4" href="index.html">
+                <span class="text-white toggle-text">VT</span><span class="text-orange">Energies</span>
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fa-solid fa-bars fs-2 text-white toggle-text"></i>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-center">
+                    <li class="nav-item"><a class="nav-link toggle-text" href="index.html">HOME</a></li>
+                    <li class="nav-item"><a class="nav-link toggle-text" href="about.html">ABOUT</a></li>
+                    <li class="nav-item"><a class="nav-link toggle-text active" href="services.html">SERVICES</a></li>
+                    <li class="nav-item"><a class="nav-link toggle-text" href="projects.html">PROJECTS</a></li>
+                    <li class="nav-item ms-lg-4 mt-3 mt-lg-0">
+                        <a class="btn-custom btn-custom-orange text-decoration-none" href="contact.html">CONTACT US</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="page-hero text-center">
+        <div class="hero-bg-text" data-aos="zoom-in" data-aos-duration="1500">CAPABILITIES</div>
+        <div class="container position-relative z-index-2">
+            <span class="badge bg-orange px-3 py-2 text-uppercase tracking-widest mb-4" data-aos="fade-up">What We Do</span>
+            <h1 class="display-3 fw-bold text-white mb-3" data-aos="fade-up" data-aos-delay="100">
+                End-To-End<br>Industrial Solutions.
+            </h1>
+            <p class="text-white opacity-75 fs-5 mx-auto" style="max-width: 650px;" data-aos="fade-up" data-aos-delay="200">
+                Our expertise traverses a diverse spectrum, providing unyielding execution across our core operational pillars. Review our comprehensive equipment and service catalog below.
+            </p>
+        </div>
+    </header>
+
+    <div class="services-wrapper">
+        
+        <section class="bg-white service-detail-block">
+            <div class="container">
+                <div class="row align-items-stretch">
+                    <div class="col-lg-5 mb-4 mb-lg-0 pe-lg-5" data-aos="fade-right">
+                        <div class="bento-image-wrapper border-start border-4 border-orange">
+                            <div class="service-badge">01</div>
+                            <img src="https://images.unsplash.com/photo-1588011930968-eadac80e6a5a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Procurement">
+                        </div>
+                    </div>
+                    <div class="col-lg-7 ps-lg-4" data-aos="fade-left">
+                        <div class="d-flex align-items-center gap-3 mb-3">
+                            <i class="fa-solid fa-boxes-stacked fs-3 text-orange"></i>
+                            <h6 class="text-orange fw-bold text-uppercase mb-0 tracking-wide">Sourcing & Supply</h6>
+                        </div>
+                        <h2 class="display-6 fw-bold text-primary-grey mb-4">General Procurement</h2>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="list-unstyled feature-list">
+                                    <li>Complete piping, Valves, Fittings, Gaskets and fasteners</li>
+                                    <li>Subsea pipes, fittings, Valves Fasteners</li>
+                                    <li>Gas Turbine Driven Gas Compressors</li>
+                                    <li>Booster Pump, Hydrators, Emulsion Tanks Etc.</li>
+                                    <li>Heat exchangers, Boilers, and Cooling towers, column</li>
+                                    <li>Safety, life saving and Firefighting equipment</li>
+                                    <li>OCTG and process pipes</li>
+                                    <li>Pumps, Compressors, Gearboxes etc.</li>
+                                    <li>Meters and Metering Systems</li>
+                                    <li>Gas Compression System & packaged units</li>
+                                    <li>ATEX Wellhead Control Panels</li>
+                                    <li>Marine Equipments and Engine Spares</li>
+                                    <li>Lifting Gears & Accessories</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="list-unstyled feature-list">
+                                    <li>Firewater main Pumps and Jockey Pumps</li>
+                                    <li>Gas Driven & Diesel Driven Generators</li>
+                                    <li>Compressed Air System Package</li>
+                                    <li>Deep Well / Water Transfer / Booster Pumps</li>
+                                    <li>Aquifer Water Filter Package</li>
+                                    <li>Chlorination Package</li>
+                                    <li>Potable Water Bladder Tank</li>
+                                    <li>Air Compressor & Compressed Air Dryer Package</li>
+                                    <li>Potable Water Treatment Package</li>
+                                    <li>Vent Stack</li>
+                                    <li>Safety Shower & Eye Shower Package</li>
+                                    <li>Safety and PPE Supplies</li>
+                                    <li>Chemical Supplies</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-soft service-detail-block border-top border-bottom border-light">
+            <div class="container">
+                <div class="row align-items-stretch flex-lg-row-reverse">
+                    <div class="col-lg-5 mb-4 mb-lg-0 ps-lg-5" data-aos="fade-left">
+                        <div class="bento-image-wrapper border-start border-4 border-orange">
+                            <div class="service-badge">02</div>
+                            <img src="https://images.unsplash.com/photo-1508450859948-4e04fabaa4ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Construction">
+                        </div>
+                    </div>
+                    <div class="col-lg-7 pe-lg-4 align-self-center" data-aos="fade-right">
+                        <div class="d-flex align-items-center gap-3 mb-3">
+                            <i class="fa-solid fa-compass-drafting fs-3 text-orange"></i>
+                            <h6 class="text-orange fw-bold text-uppercase mb-0 tracking-wide">Build & Deploy</h6>
+                        </div>
+                        <h2 class="display-6 fw-bold text-primary-grey mb-4">Fabrication & Construction</h2>
+                        <ul class="list-unstyled feature-list">
+                            <li>Heavy duty onshore/offshore platform structures</li>
+                            <li>Welding of Storage Tank</li>
+                            <li>Liquefied Gas Tank Fabrication</li>
+                            <li>Industrial Scaffolding Installation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-primary-grey text-white service-detail-block bg-animated-grid">
+            <div class="container position-relative z-index-2">
+                <div class="row align-items-stretch">
+                    <div class="col-lg-5 mb-4 mb-lg-0 pe-lg-5" data-aos="fade-right">
+                        <div class="bento-image-wrapper border-start border-4 border-orange">
+                            <div class="service-badge">03</div>
+                            <img src="https://images.unsplash.com/photo-1673662686870-33f0b8864f5e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Maintenance">
+                        </div>
+                    </div>
+                    <div class="col-lg-7 ps-lg-4 align-self-center" data-aos="fade-left">
+                        <div class="d-flex align-items-center gap-3 mb-3">
+                            <i class="fa-solid fa-wrench fs-3 text-orange"></i>
+                            <h6 class="text-orange fw-bold text-uppercase mb-0 tracking-wide">Sustain & Rehabilitate</h6>
+                        </div>
+                        <h2 class="display-6 fw-bold text-white mb-4">Repair & Maintenance</h2>
+                        <ul class="list-unstyled feature-list feature-list-dark">
+                            <li>Mechanical and Electrical Maintenance</li>
+                            <li>Repair and Calibration of Injection Pumps and Nozzles</li>
+                            <li>Valves, Pumps, Tanks, Sensing Equipment and Gas Detector Services</li>
+                            <li>Tank Cleaning and Rehabilitation Services (Filters, Heat exchanges, separators etc.)</li>
+                            <li>Inspection and Maintenance of Gear Box</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white service-detail-block">
+            <div class="container">
+                <div class="row align-items-stretch flex-lg-row-reverse">
+                    <div class="col-lg-5 mb-4 mb-lg-0 ps-lg-5" data-aos="fade-left">
+                        <div class="bento-image-wrapper border-start border-4 border-orange">
+                            <div class="service-badge">04</div>
+                            <img src="assets/img/hero3.jpeg" alt="Leasing">
+                        </div>
+                    </div>
+                    <div class="col-lg-7 pe-lg-4" data-aos="fade-right">
+                        <div class="d-flex align-items-center gap-3 mb-3">
+                            <i class="fa-solid fa-truck-fast fs-3 text-orange"></i>
+                            <h6 class="text-orange fw-bold text-uppercase mb-0 tracking-wide">Heavy Machinery</h6>
+                        </div>
+                        <h2 class="display-6 fw-bold text-primary-grey mb-4">Equipment Leasing</h2>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="list-unstyled feature-list">
+                                    <li>Cranes</li>
+                                    <li>Excavators</li>
+                                    <li>Bulldozers</li>
+                                    <li>Self-loading truck, Flat & Low Beds</li>
+                                    <li>Barges</li>
+                                    <li>Tug Boats</li>
+                                    <li>Air Compressors</li>
+                                    <li>Welding Machines</li>
+                                    <li>Test Benches and Metrological equipment</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="list-unstyled feature-list">
+                                    <li>Six Channel PWHT Machine & Recorders</li>
+                                    <li>Anti-spark Hand tools & bending machines</li>
+                                    <li>Pneumatic Lights, Air Dryers, Blowers, Air Tanks, Flange expanders</li>
+                                    <li>Pneumatic and manual lifting equipment</li>
+                                    <li>Corrosion Control Equipment (Vacuum Sand Pots)</li>
+                                    <li>Hose Crimping and Skiving Machines</li>
+                                    <li>Mobile and Crawler Cranes</li>
+                                    <li>Workshop 15.5T Electric Overhead Double Girder Gantry Crane</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-soft service-detail-block border-top border-bottom border-light">
+            <div class="container">
+                <div class="row align-items-stretch">
+                    <div class="col-lg-5 mb-4 mb-lg-0 pe-lg-5" data-aos="fade-right">
+                        <div class="bento-image-wrapper border-start border-4 border-orange">
+                            <div class="service-badge">05</div>
+                            <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Marine Logistics">
+                        </div>
+                    </div>
+                    <div class="col-lg-7 ps-lg-4 align-self-center" data-aos="fade-left">
+                        <div class="d-flex align-items-center gap-3 mb-3">
+                            <i class="fa-solid fa-ship fs-3 text-orange"></i>
+                            <h6 class="text-orange fw-bold text-uppercase mb-0 tracking-wide">Complex Logistics</h6>
+                        </div>
+                        <h2 class="display-6 fw-bold text-primary-grey mb-4">Haulage Services</h2>
+                        <ul class="list-unstyled feature-list">
+                            <li>Land Haulage</li>
+                            <li>Marine Haulage</li>
+                            <li>Industrial Materials Transport</li>
+                            <li>Petroleum Products Handling</li>
+                            <li>Heavy Duty Equipment Logistics</li>
+                            <li>Lubricant Transport</li>
+                            <li>Chemical Supply Logistics</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-orange text-white service-detail-block">
+            <div class="container">
+                <div class="row align-items-stretch flex-lg-row-reverse">
+                    <div class="col-lg-5 mb-4 mb-lg-0 ps-lg-5" data-aos="fade-left">
+                        <div class="bento-image-wrapper border-start border-4 border-white shadow-lg">
+                            <div class="service-badge bg-white text-orange">06</div>
+                            <img src="https://images.unsplash.com/photo-1621298516851-047f72b40bd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Manpower & Safety">
+                        </div>
+                    </div>
+                    <div class="col-lg-7 pe-lg-4 align-self-center" data-aos="fade-right">
+                        <div class="d-flex align-items-center gap-3 mb-3">
+                            <i class="fa-solid fa-users-viewfinder fs-3 text-white"></i>
+                            <h6 class="text-white fw-bold text-uppercase mb-0 tracking-wide">Zero Harm Commitment</h6>
+                        </div>
+                        <h2 class="display-6 fw-bold text-white mb-4">Manpower, Training & Safety</h2>
+                        <p class="text-white opacity-75 fs-5 mb-4">Providing highly skilled manpower alongside rigorous operational training. We equip your team with the knowledge and the safety apparatus to execute flawlessly.</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="list-unstyled feature-list feature-list-orange">
+                                    <li>Skilled Manpower Provision</li>
+                                    <li>Operational Training and Development</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="list-unstyled feature-list feature-list-orange">
+                                    <li>Safety and PPE Supplies</li>
+                                    <li>Lifting Gears & Safety Accessories</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer id="contact" class="bg-secondary-grey text-white pt-5">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-4 pe-lg-5">
+                    <a class="navbar-brand fw-bold text-uppercase fs-4 mb-4 d-block" href="index.html">
+                        <img src="assets/img/logo.png" alt="VT Energies Logo" height="45">
+                    </a>
+                    <p class="text-white opacity-75 mb-4 pe-lg-3">Your best solution partners. Providing complete value through top-quality EPC services, marine logistics, and industrial maintenance.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-white fs-5 opacity-75 hover-opacity-100 transition-all"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="#" class="text-white fs-5 opacity-75 hover-opacity-100 transition-all"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" class="text-white fs-5 opacity-75 hover-opacity-100 transition-all"><i class="fa-brands fa-facebook"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="text-uppercase fw-bold text-white mb-4 tracking-wide fs-6">Company</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="about.html" class="text-white opacity-75 text-decoration-none hover-text-orange transition-all">About Us</a></li>
+                        <li class="mb-2"><a href="projects.html" class="text-white opacity-75 text-decoration-none hover-text-orange transition-all">Projects Gallery</a></li>
+                        <li class="mb-2"><a href="about.html" class="text-white opacity-75 text-decoration-none hover-text-orange transition-all">HSE Policy</a></li>
+                        <li class="mb-2"><a href="about.html" class="text-white opacity-75 text-decoration-none hover-text-orange transition-all">Nigerian Content</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-uppercase fw-bold text-white mb-4 tracking-wide fs-6">Operations</h5>
+                    <ul class="list-unstyled text-white opacity-75">
+                        <li class="mb-3 d-flex align-items-start">
+                            <i class="fa-solid fa-location-dot mt-1 me-3 text-orange"></i>
+                            <span><strong>Head Office:</strong> GV45, Close 6 Green Village Estate, Elelewon/Akpajo, Rivers State</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-start">
+                            <i class="fa-solid fa-wrench mt-1 me-3 text-orange"></i>
+                            <span><strong>Workshop:</strong> 12/14 Ekwu-Okah Ave, Odani Off Eleme-Onne Rd, Port Harcourt</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3">
+                    <h5 class="text-uppercase fw-bold text-white mb-4 tracking-wide fs-6">Contact Us</h5>
+                    <ul class="list-unstyled text-white opacity-75 mb-4">
+                        <li class="mb-2"><i class="fa-solid fa-phone me-2 text-orange"></i> 08038326700</li>
+                        <li class="mb-2"><i class="fa-solid fa-phone me-2 text-orange"></i> 08075089171</li>
+                        <li class="mb-2 mt-3"><i class="fa-solid fa-envelope me-2 text-orange"></i> vroitrezenergies@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="border-top border-secondary mt-2">
+            <div class="container py-4">
+                <div class="row align-items-center">
+                    <div class="col-md-6 text-white opacity-50" style="font-size: 0.85rem;">
+                        &copy; 2026 VROI-TREZ Energies Limited (RC 7025466).
+                    </div>
+                    <div class="col-md-6 text-md-end text-white opacity-50 fw-medium text-uppercase tracking-wide mt-3 mt-md-0" style="font-size: 0.75rem;">
+                        Designed with Architectural Precision
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Initialize AOS
+            AOS.init({
+                once: true,
+                offset: 50,
+                duration: 900,
+                easing: 'ease-out-quart',
+            });
+
+            // Navbar Scroll Effect
+            const navbar = document.getElementById('mainNav');
+            const toggleColorText = document.querySelectorAll('.toggle-text');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                    toggleColorText.forEach(el => {
+                        el.classList.remove('text-white');
+                        el.classList.add('text-primary-grey');
+                    });
+                } else {
+                    navbar.classList.remove('scrolled');
+                    toggleColorText.forEach(el => {
+                        el.classList.remove('text-primary-grey');
+                        el.classList.add('text-white'); 
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

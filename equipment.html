@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipment Leasing Services | VT Energies</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        /* --- CORE VARIABLES --- */
+        :root {
+            --black: #000000;
+            --charcoal: #111111;
+            --hero-bg: #2B2D2F;
+            --grey-text: #666666;
+            --bg-light: #FDFDFD;
+            --bg-gray: #F7F7F7;
+            --orange: #F05A28;
+            --white: #FFFFFF;
+            --border-color: #EBEBEB;
+            --shadow-card: 0 12px 40px rgba(0, 0, 0, 0.04);
+            --shadow-hover: 0 16px 50px rgba(0, 0, 0, 0.08);
+        }
+
+        /* --- GLOBAL TYPOGRAPHY --- */
+        html,
+        body {
+            overflow-x: hidden !important;
+            width: 100%;
+            font-family: 'Inter', sans-serif;
+            color: var(--grey-text);
+            background-color: var(--bg-light);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        .heading-serif {
+            font-family: 'Playfair Display', serif;
+            color: var(--black);
+        }
+
+        .text-orange {
+            color: var(--orange) !important;
+        }
+
+        .bg-orange {
+            background-color: var(--orange) !important;
+        }
+
+        /* --- BUTTONS --- */
+        .btn-custom {
+            display: inline-block;
+            padding: 0.8rem 2.2rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border: none;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-orange {
+            background-color: var(--orange);
+            color: var(--white);
+        }
+
+        .btn-orange:hover {
+            background-color: #d94d1f;
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand span {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            letter-spacing: -1px;
+        }
+
+        .nav-link {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--black) !important;
+            margin: 0 12px;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--orange) !important;
+        }
+
+        /* Dropdown Styling */
+        .dropdown-menu.dark-dropdown {
+            background-color: var(--charcoal);
+            border: none;
+            border-radius: 8px;
+            padding: 1rem 0;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            min-width: 260px;
+        }
+
+        .dark-dropdown .dropdown-item {
+            color: #d1d1d1;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            padding: 0.7rem 1.5rem;
+            transition: all 0.2s ease;
+            position: relative;
+            background: transparent;
+        }
+
+        .dark-dropdown .dropdown-item:hover,
+        .dark-dropdown .dropdown-item.active {
+            color: var(--white);
+            background-color: rgba(255, 255, 255, 0.03);
+            padding-left: 1.8rem;
+        }
+
+        /* --- HERO SECTION --- */
+        .service-hero {
+            min-height: 75vh;
+            border-radius: 24px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+
+            margin-top: 120px;
+            margin-bottom: 5rem;
+
+            box-shadow: var(--shadow-card);
+
+            background-image: url('https://images.unsplash.com/photo-1590504805674-dfd80ba8a160?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDR8fGVxdWlwbWVudCUyMGxlYXNpbmd8ZW58MHx8MHx8fDA%3D');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .service-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.65);
+            z-index: 1;
+        }
+
+        .hero-badge {
+            background-color: var(--orange);
+            color: var(--white);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            color: var(--white);
+            font-size: 3.5rem;
+            max-width: 850px;
+            margin: 0 auto 1.5rem auto;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 720px;
+            margin: 0 auto;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        /* --- SECTION HEADER --- */
+        .section-eyebrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: var(--orange);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .section-eyebrow::before,
+        .section-eyebrow::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 1px;
+            background-color: var(--orange);
+            opacity: 0.5;
+        }
+
+        /* --- SERVICE CARDS --- */
+        .service-card {
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-5px);
+        }
+
+        .service-img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+        }
+
+        .service-content {
+            padding: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            flex-grow: 1;
+        }
+
+        .service-icon {
+            color: var(--orange);
+            font-size: 1.8rem;
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+
+        .service-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-desc {
+            font-size: 0.9rem;
+            color: var(--grey-text);
+            margin-bottom: 0;
+            line-height: 1.5;
+        }
+
+        /* --- EQUIPMENT RANGE SECTION --- */
+        .equipment-range-title {
+            font-size: 2rem;
+            text-align: center;
+            margin: 5rem 0 3rem 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .range-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .range-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+            color: #444;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .range-list li:last-child {
+            border-bottom: none;
+        }
+
+        .range-icon {
+            background-color: var(--orange);
+            color: var(--white);
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* --- WHY WORK WITH US CARD --- */
+        .feature-card {
+            background-color: var(--bg-gray);
+            border-radius: 12px;
+            padding: 2.5rem;
+            height: 100%;
+            border: 1px solid var(--border-color);
+        }
+
+        .feature-title {
+            color: var(--orange);
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-title i {
+            font-size: 1.4rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            color: var(--charcoal);
+            line-height: 1.5;
+        }
+
+        .feature-icon-wrapper {
+            background-color: rgba(240, 90, 40, 0.1);
+            color: var(--orange);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* --- CTA SECTION --- */
+        .cta-section {
+            padding: 5rem 0;
+            background-color: var(--bg-light);
+        }
+
+        .cta-box {
+            background-color: var(--black);
+            border-radius: 16px;
+            padding: 5rem 3rem;
+            text-align: center;
+            color: var(--white);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .cta-heading {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-heading .text-orange {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            text-transform: none;
+        }
+
+        /* --- FOOTER --- */
+        .site-footer {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 4rem 0 2rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--orange);
+        }
+
+        .footer-contact li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        .footer-contact i {
+            color: var(--orange);
+            margin-top: 0.3rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/img/logo.png" alt="VT Energies" style="height: 60px; width: auto; display: block;">
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fa-solid fa-bars fs-2 text-dark"></i>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav align-items-center mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Services
+                        </a>
+                        <ul class="dropdown-menu dark-dropdown shadow">
+                            <li><a class="dropdown-item" href="general-procurement.html">General Procurement</a></li>
+                            <li><a class="dropdown-item" href="haulage.html">Haulage Services</a></li>
+                            <li><a class="dropdown-item active" href="equipment.html">Equipment Leasing</a></li>
+                            <li><a class="dropdown-item" href="repair.html">Repair & Maintenance</a></li>
+                            <li><a class="dropdown-item" href="fabrication.html">Fabrication &
+                                    Construction</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="partner.html">Partners</a></li>
+                    <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+                </ul>
+                <div class="d-none d-lg-block">
+                    <a href="contact.html" class="btn-custom btn-orange text-white">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <div class="container" data-aos="fade-down">
+        <section class="service-hero">
+            <div class="position-relative" style="z-index: 2;">
+                <span class="hero-badge">BUILT FOR INDUSTRY</span>
+    
+                <h1 class="hero-title heading-serif">
+                    Equipment Leasing Services
+                </h1>
+    
+                <p class="hero-subtitle">
+                    Access the machines you need, without the heavy upfront cost. We provide flexible
+                    equipment leasing solutions for businesses in construction, manufacturing, and logistic.
+                </p>
+            </div>
+        </section>
+        </div>
+
+    <!-- FEATURED EQUIPMENT GRID -->
+    <section class="container mb-5">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <div class="section-eyebrow">LEASING</div>
+            <h2 class="heading-serif fs-1 mb-3">Featured Equipment</h2>
+            <p class="mx-auto text-muted" style="max-width: 650px;">
+                We provide reliable and well-maintained equipment to support your projects and drive your success
+            </p>
+        </div>
+
+        <div class="row g-4">
+            <!-- Card 1: Tug Boats -->
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="50">
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1624800127864-618de3d1f61f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHRvZyUyMGJvYXR8ZW58MHx8MHx8fDA%3D"
+                        alt="Tug Boat" class="service-img">
+                    <div class="service-content">
+                        <i class="fa-solid fa-ship service-icon"></i>
+                        <div>
+                            <h3 class="service-title heading-serif">Tug Boats</h3>
+                            <p class="service-desc">Marine towing, maneuvering, docking, and offshore support.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Card 2: Excavators -->
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1580901369227-308f6f40bdeb?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZXNjYXZhdG9yfGVufDB8fDB8fHww"
+                        alt="Excavators" class="service-img">
+                    <div class="service-content">
+                        <i class="fa-solid fa-tractor service-icon"></i>
+                        <div>
+                            <h3 class="service-title heading-serif">Excavators</h3>
+                            <p class="service-desc">Efficient digging, trenching, demolition, and earthmoving operations.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Card 3: Self-Loading Trucks -->
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="150">
+                <div class="service-card">
+                    <img src="https://media.istockphoto.com/id/2159231286/photo/a-truck-with-a-reinforced-concrete-panel-loaded-on-it.jpg?s=1024x1024&w=is&k=20&c=WNL7tfJnv08U-9faIVsZ7xDw-a9zi0wx7q9Oy_wFVBc="
+                        alt="Self-Loading Trucks" class="service-img">
+                    <div class="service-content">
+                        <i class="fa-solid fa-truck-front service-icon"></i>
+                        <div>
+                            <h3 class="service-title heading-serif">Self-Loading Trucks</h3>
+                            <p class="service-desc">Safe and efficient transportation of heavy equipment and materials.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Card 4: Air compressors -->
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1737874132953-b39a4812875d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YWlyJTIwY29tcHJlc3NvcnxlbnwwfHwwfHx8MA%3D%3D"
+                        alt="Air Compressors" class="service-img">
+                    <div class="service-content">
+                        <i class="fa-solid fa-wind service-icon"></i>
+                        <div>
+                            <h3 class="service-title heading-serif">Air compressors</h3>
+                            <p class="service-desc">Dependable compressed-air power for tools and industrial applications.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Card 5: Metrological Equipment -->
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="250">
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1535612731405-1348d22b842f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWV0cm9sb2dpY2FsJTIwZXF1aXBtZW50fGVufDB8fDB8fHww"
+                        alt="Metrological Equipment" class="service-img">
+                    <div class="service-content">
+                        <i class="fa-solid fa-microscope service-icon"></i>
+                        <div>
+                            <h3 class="service-title heading-serif">Metrological Equipment</h3>
+                            <p class="service-desc">Precision testing, measurement, calibration, and offshore support.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Card 6: Bulldozer -->
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
+                <div class="service-card">
+                    <img src="https://media.istockphoto.com/id/2252273782/photo/yellow-bulldozer-with-a-large-blade-isolated-on-a-white-background-front-part-of-the-machine.webp?a=1&b=1&s=612x612&w=0&k=20&c=KSvChC0B-S-Sx9iHxqxkiTGZQJC9irWy7ABA--rpBs4="
+                        alt="Bulldozer" class="service-img">
+                    <div class="service-content">
+                        <i class="fa-solid fa-truck-monster service-icon"></i>
+                        <div>
+                            <h3 class="service-title heading-serif">Bulldozer</h3>
+                            <p class="service-desc">Powerful grading, clearing, leveling, and earthmoving performance.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Card 7: Welding -->
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="350">
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8d2VsZGluZ3xlbnwwfHwwfHx8MA%3D%3D"
+                        alt="Welding Solutions" class="service-img">
+                    <div class="service-content">
+                        <i class="fa-solid fa-fire-flame-curved service-icon"></i>
+                        <div>
+                            <h3 class="service-title heading-serif">Welding</h3>
+                            <p class="service-desc">Reliable welding solutions for fabrication, repairs, and maintenance.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Card 8: Cranes -->
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
+                <div class="service-card">
+                    <img src="https://media.istockphoto.com/id/2236618118/photo/construction-with-cranes-in-tokyo.webp?a=1&b=1&s=612x612&w=0&k=20&c=S4O1l31wEVNbZ64sRg-1W5xAD_NgUpHU74wX3ocMAd8="
+                        alt="Cranes" class="service-img">
+                    <div class="service-content">
+                        <i class="fa-solid fa-weight-hanging service-icon"></i>
+                        <div>
+                            <h3 class="service-title heading-serif">Cranes</h3>
+                            <p class="service-desc">Heavy lifting, positioning, and material handling for industrial and
+                                construction project.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>  </div>
+
+        <!-- OUR EQUIPMENT RANGE SECTION -->
+        <h2 class="heading-serif equipment-range-title" data-aos="fade-up">OUR EQUIPMENT RANGE</h2>
+
+        <div class="row g-5 align-items-stretch mb-5">
+            <!-- Left Checklist -->
+            <div class="col-lg-7" data-aos="fade-right">
+                <ul class="range-list">
+                    <li>
+                        <span class="range-icon"><i class="fa-solid fa-check"></i></span>
+                        <span>Pneumatic Lights, Air Dryers, Blowers, Air Tanks, Extractors, Flange expanders, nut
+                            splitters.</span>
+                    </li>
+                    <li>
+                        <span class="range-icon"><i class="fa-solid fa-check"></i></span>
+                        <span>Anti-spark Hand tools, bending and rolling machines.</span>
+                    </li>
+                    <li>
+                        <span class="range-icon"><i class="fa-solid fa-check"></i></span>
+                        <span>Pneumatic and manual lifting equipment and accessories</span>
+                    </li>
+                    <li>
+                        <span class="range-icon"><i class="fa-solid fa-check"></i></span>
+                        <span>Mobile and Crawler Cranes</span>
+                    </li>
+                    <li>
+                        <span class="range-icon"><i class="fa-solid fa-check"></i></span>
+                        <span>Corrosion Control Equipment (Vacuum Sand Pots, Paint sprayers etc)</span>
+                    </li>
+                    <li>
+                        <span class="range-icon"><i class="fa-solid fa-check"></i></span>
+                        <span>Hose Crimping and Skiving machines</span>
+                    </li>
+                    <li>
+                        <span class="range-icon"><i class="fa-solid fa-check"></i></span>
+                        <span>Six Channel Post Weld Heat Treatment Machine, Accessories and Chare Recorders.</span>
+                    </li>
+                    <li>
+                        <span class="range-icon"><i class="fa-solid fa-check"></i></span>
+                        <span>Workshop installed 15.5T Electric Overhead Double Girder Gantry Crane Etc.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Right Why Work With Us Box -->
+            <div class="col-lg-5" data-aos="fade-left">
+                <div class="feature-card">
+                    <h3 class="feature-title">
+                        <i class="fa-solid fa-handshake"></i> WHY WORK WITH US
+                    </h3>
+                    <ul class="feature-list">
+                        <li>
+                            <div class="feature-icon-wrapper"><i class="fa-solid fa-check"></i></div>
+                            <span>Wide range of high-quality equipment.</span>
+                        </li>
+                        <li>
+                            <div class="feature-icon-wrapper"><i class="fa-solid fa-check"></i></div>
+                            <span>Well-maintained and safety compliant.</span>
+                        </li>
+                        <li>
+                            <div class="feature-icon-wrapper"><i class="fa-solid fa-certificate"></i></div>
+                            <span>Certified technicians skilled engineers and safety compliant.</span>
+                        </li>
+                        <li>
+                            <div class="feature-icon-wrapper"><i class="fa-solid fa-user-tie"></i></div>
+                            <span>Expert support and reliable service.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="cta-section">
+        <div class="container" data-aos="zoom-in">
+            <div class="cta-box">
+                <h2 class="heading-serif cta-heading">READY TO START YOUR NEXT <span class="text-orange">PROJECT?</span>
+                </h2>
+                <p class="mx-auto mb-5 text-white opacity-75"
+                    style="max-width: 700px; font-size: 1.1rem; line-height: 1.6;">
+                    Partner with VT Energies for reliable, top-tier engineering and industrial solutions. Let's build
+                    what matters. we combine deep technical expertise with a commitment to safety, quality and
+                    innovation.
+                </p>
+                <a href="contact.html" class="btn-custom btn-orange text-white fs-6 py-3 px-5">REQUEST A
+                    CONSULTATION</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-4 pe-lg-5">
+                    <a class="navbar-brand" href="index.html">
+                        <img src="assets/img/logo.png" alt="VT Energies"
+                            style="height: 100px; width: auto; display: block;">
+                    </a>
+                    <p class="mb-4 pe-lg-3 text-white opacity-50" style="font-size: 0.85rem; line-height: 1.6;">Your best
+                        solution partners, providing complete value through top-quality EPC service, marine logistics, and
+                        industrial maintenance. With a strong focus on quality, and timely project delivery, we ensure
+                        exceptional results from planning and execution to completion and ongoing support.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-orange fs-5"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="text-orange fs-5"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" class="text-orange fs-5"><i class="fa-brands fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+    
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="heading-serif text-white fs-6 mb-4">COMPANY</h5>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="about.html">HSE Policy</a></li>
+                        <li><a href="about.html">Nigerian Content</a></li>
+                    </ul>
+                </div>
+    
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="heading-serif text-white fs-6 mb-4">SERVICES</h5>
+                    <ul class="footer-links">
+                        <li><a href="haulage.html">Haulage Services</a></li>
+                        <li><a href="equipment.html">Equipment Leasing</a></li>
+                        <li><a href="repair.html">Repair & Maintenance</a></li>
+                        <li><a href="fabrication.html">Fabrication & Construction</a></li>
+                    </ul>
+                </div>
+    
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="heading-serif text-white fs-6 mb-4">CONTACT US</h5>
+                    <ul class="footer-links footer-contact">
+                        <li>
+                            <i class="fa-solid fa-location-dot mt-1"></i>
+                            <span>Head office: GV45, Close 6 Green Village Estate, Elelewon/Apajo, Rivers State</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-map-pin mt-1"></i>
+                            <span>Workshop: 12/14 Ekwu Okah Ave, Odani off Eleme Onne Rd, Port Harcourt.</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-phone mt-1"></i>
+                            <span>TELL: 08038326700, 08075089171</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-envelope mt-1"></i>
+                            <span>Email: info@vtenergies.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+    
+            <div class="row footer-bottom"
+                style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; margin-top: 3rem;">
+                <div class="col-md-6 text-center text-md-start text-white opacity-50" style="font-size: 0.85rem;">
+                    <span class="text-orange">&copy;</span> 2026 VROI-TREZ Energies Limited (RC 7025466).
+                </div>
+                <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
+                    <a href="#" class="text-white opacity-50 text-decoration-none me-3" style="font-size: 0.85rem;">Privacy
+                        Policy</a>
+                    <span class="text-white opacity-50">|</span>
+                    <a href="#" class="text-white opacity-50 text-decoration-none ms-3" style="font-size: 0.85rem;">Terms &
+                        Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            AOS.init({once: true, offset: 30, duration: 800, easing: 'ease-in-out'});
+
+            // Navbar shadow on scroll
+            const navbar = document.getElementById('mainNav');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.style.padding = '0.5rem 0';
+                    navbar.style.boxShadow = '0 4px 20px rgba(0,0,0,0.05)';
+                } else {
+                    navbar.style.padding = '1rem 0';
+                    navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.03)';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>General Procurement | VT Energies</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        /* --- CORE VARIABLES --- */
+        :root {
+            --black: #000000;
+            --charcoal: #111111;
+            --charcoal-light: #1A1A1A;
+            --grey-text: #666666;
+            --bg-light: #FDFDFD;
+            --bg-gray: #F5F5F5;
+            --orange: #F05A28;
+            --white: #FFFFFF;
+            --shadow-card: 0 12px 40px rgba(0, 0, 0, 0.04);
+            --shadow-hover: 0 16px 50px rgba(0, 0, 0, 0.08);
+        }
+
+        /* --- GLOBAL TYPOGRAPHY --- */
+        html,
+        body {
+            overflow-x: hidden !important;
+            width: 100%;
+            font-family: 'Inter', sans-serif;
+            color: var(--grey-text);
+            background-color: var(--bg-light);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        .heading-serif {
+            font-family: 'Playfair Display', serif;
+            color: var(--black);
+        }
+
+        .text-orange {
+            color: var(--orange) !important;
+        }
+
+        .bg-orange {
+            background-color: var(--orange) !important;
+        }
+
+        /* --- BUTTONS --- */
+        .btn-custom {
+            display: inline-block;
+            padding: 0.8rem 2.2rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border: none;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-orange {
+            background-color: var(--orange);
+            color: var(--white);
+        }
+
+        .btn-orange:hover {
+            background-color: #d94d1f;
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        /* --- SECTION EYEBROWS --- */
+        .section-eyebrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: var(--orange);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .section-eyebrow.left-aligned {
+            justify-content: flex-start;
+        }
+
+        .section-eyebrow::before,
+        .section-eyebrow::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 1px;
+            background-color: var(--orange);
+            opacity: 0.5;
+        }
+
+        .section-eyebrow.left-aligned::before {
+            display: none;
+        }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand span {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            letter-spacing: -1px;
+        }
+
+        .nav-link {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--black) !important;
+            margin: 0 12px;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--orange) !important;
+        }
+
+        /* Dropdown Styling */
+        .dropdown-menu.dark-dropdown {
+            background-color: var(--charcoal);
+            border: none;
+            border-radius: 8px;
+            padding: 1rem 0;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            min-width: 260px;
+        }
+
+        .dark-dropdown .dropdown-item {
+            color: #d1d1d1;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            padding: 0.7rem 1.5rem;
+            transition: all 0.2s ease;
+            position: relative;
+            background: transparent;
+        }
+
+        .dark-dropdown .dropdown-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 15%;
+            height: 70%;
+            width: 3px;
+            background-color: var(--orange);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .dark-dropdown .dropdown-item:hover,
+        .dark-dropdown .dropdown-item.active {
+            color: var(--white);
+            background-color: rgba(255, 255, 255, 0.03);
+            padding-left: 1.8rem;
+        }
+
+        .dark-dropdown .dropdown-item:hover::before,
+        .dark-dropdown .dropdown-item.active::before {
+            opacity: 1;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero-wrapper {
+            min-height: 75vh;
+            border-radius: 24px;
+            /* Gives the rounded look from Figma */
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-top: 120px;
+            /* Separates from the fixed navbar */
+            box-shadow: var(--shadow-card);
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Industrial procurement background */
+            background-image: url('https://plus.unsplash.com/premium_photo-1676625176020-3bbb1c0adea1?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTQ0fHxjb25zdHJ1Y3Rpb258ZW58MHx8MHx8fDA%3D');
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(17, 17, 17, 0.75);
+            /* Dark charcoal overlay */
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            padding: 4rem 2rem;
+            max-width: 900px;
+        }
+
+        .hero-badge {
+            background-color: var(--orange);
+            color: var(--white);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            color: var(--white);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-deco-circle {
+            position: absolute;
+            bottom: 30px;
+            right: 40px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--orange);
+            border-radius: 50%;
+            z-index: 3;
+        }
+
+        /* --- VISUAL PROOF COLLAGE --- */
+        .collage-section {
+            padding: 6rem 0;
+            background-color: var(--white);
+        }
+
+        .collage-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: repeat(10, 50px);
+            gap: 15px;
+            position: relative;
+        }
+
+        .collage-img {
+            border-radius: 16px;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            box-shadow: var(--shadow-card);
+            transition: transform 0.4s ease;
+        }
+
+        .collage-img:hover {
+            transform: scale(1.02);
+            z-index: 10;
+        }
+
+        /* Specific layout mimicking the Figma design */
+        .img-1 {
+            grid-column: 7 / 13;
+            grid-row: 1 / 6;
+        }
+
+        /* Top Right - Pipes */
+        .img-2 {
+            grid-column: 2 / 7;
+            grid-row: 3 / 8;
+        }
+
+        /* Middle Left - Industrial */
+        .img-3 {
+            grid-column: 7 / 12;
+            grid-row: 6 / 10;
+        }
+
+        /* Bottom Right - Equipment */
+        .img-4 {
+            grid-column: 4 / 8;
+            grid-row: 8 / 11;
+            position: relative;
+            z-index: 5;
+        }
+
+        /* Bottom Center - Crane/Hook */
+
+        /* --- CAPABILITIES GRID --- */
+        .capabilities-section {
+            padding: 5rem 0;
+            background-color: var(--bg-gray);
+            border-top: 1px solid #EBEBEB;
+        }
+
+        .procurement-card {
+            background-color: var(--white);
+            border: 1px solid #EBEBEB;
+            border-radius: 12px;
+            padding: 1.5rem;
+            height: 100%;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .procurement-card:hover {
+            box-shadow: var(--shadow-card);
+            border-color: rgba(240, 90, 40, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .card-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--orange);
+            border-radius: 50%;
+            margin-top: 8px;
+            flex-shrink: 0;
+        }
+
+        .card-text {
+            font-size: 0.95rem;
+            color: var(--black);
+            font-weight: 500;
+            line-height: 1.5;
+            margin-bottom: 0;
+        }
+
+        /* --- CTA SECTION --- */
+        .cta-section {
+            padding: 5rem 0;
+            background-color: var(--bg-light);
+        }
+
+        .cta-box {
+            background-color: var(--black);
+            border-radius: 16px;
+            padding: 5rem 3rem;
+            text-align: center;
+            color: var(--white);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .cta-heading {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-heading .text-orange {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            text-transform: none;
+        }
+
+        /* --- FOOTER --- */
+        .site-footer {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 4rem 0 2rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--orange);
+        }
+
+        .footer-contact li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        .footer-contact i {
+            color: var(--orange);
+            margin-top: 0.3rem;
+        }
+
+        @media (max-width: 991px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+
+            .collage-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                gap: 20px;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .collage-img {
+                height: 250px;
+            }
+
+            .img-4 {
+                margin-top: -50px;
+                width: 60%;
+                align-self: center;
+                border: 4px solid var(--white);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+
+            .hero-content {
+                padding: 3rem 1.5rem;
+            }
+
+            .cta-heading {
+                font-size: 2rem;
+            }
+
+            .cta-box {
+                padding: 3rem 1.5rem;
+            }
+
+            .procurement-card {
+                padding: 1.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/img/logo.png" alt="VT Energies" style="height: 60px; width: auto; display: block;">
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fa-solid fa-bars fs-2 text-dark"></i>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav align-items-center mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Services
+                        </a>
+                        <ul class="dropdown-menu dark-dropdown shadow">
+                            <li><a class="dropdown-item active" href="general-procurement.html">General Procurement</a>
+                            </li>
+                            <li><a class="dropdown-item" href="haulage.html">Haulage Services</a></li>
+                            <li><a class="dropdown-item" href="equipment.html">Equipment Leasing</a></li>
+                            <li><a class="dropdown-item" href="repair.html">Repair & Maintenance</a></li>
+                            <li><a class="dropdown-item" href="fabrication.html">Fabrication & Construction</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="partner.html">Partners</a></li>
+                    <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+                </ul>
+                <div class="d-none d-lg-block">
+                    <a href="contact.html" class="btn-custom btn-orange text-white">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="container" id="hero">
+        <div class="hero-wrapper" data-aos="fade-up">
+            <div class="hero-bg"></div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <span class="hero-badge">Industrial Solutions</span>
+                <h1 class="hero-title heading-serif">General Procurement</h1>
+                <p class="text-white opacity-75 fs-5 mx-auto mb-0" style="max-width: 650px; line-height: 1.6;">
+                    We manage complete projects from engineering to construction, delivering efficient solutions with
+                    quality and precision.
+                </p>
+            </div>
+            <div class="hero-deco-circle"></div>
+        </div>
+    </header>
+
+    <!-- VISUAL PROOF COLLAGE SECTION -->
+    <section class="collage-section">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <div class="section-eyebrow">Visual Proof</div>
+                <h2 class="heading-serif fs-1 mb-3">Recent Execution</h2>
+                <p class="mx-auto text-muted" style="max-width: 600px;">
+                    Supplying top-tier industrial components and heavy machinery to ensure operational excellence across
+                    complex engineering projects.
+                </p>
+            </div>
+    
+            <div class="collage-grid mt-5" data-aos="fade-up" data-aos-delay="100">
+    
+                <!-- Top Right: Industrial Pipes -->
+                <img src="https://images.unsplash.com/photo-1694674818352-f6061a0561a1?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGluZHVzdHJpYWwlMjBwaXBlbGluZXxlbnwwfHwwfHx8MA%3D%3D"
+                    alt="Industrial Piping" class="collage-img img-1">
+    
+                <!-- Middle Left: Robotics/Equipment -->
+                <img src="https://images.unsplash.com/photo-1642927778267-4e8b787b325a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjN8fGV4Y2F2YXRvcnxlbnwwfHwwfHx8MA%3D%3D"
+                    alt="Industrial Equipment" class="collage-img img-2">
+    
+                <!-- Bottom Right: Heavy Machinery -->
+                <img src="https://images.unsplash.com/photo-1552207802-77bcb0d13122?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2hpcHN8ZW58MHx8MHx8fDA%3D"
+                    alt="Excavators" class="collage-img img-3">
+    
+                <!-- Bottom Center: Crane Hook / Lifting Gear -->
+                <img src="https://images.unsplash.com/photo-1741815867786-ff647a7921ff?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGNyYW5lJTIwaG9va3N8ZW58MHx8MHx8fDA%3D"
+                    alt="Lifting Gear" class="collage-img img-4">
+    
+            </div>
+        </div>
+    </section>
+
+    <!-- PROCUREMENT CAPABILITIES GRID -->
+    <section class="capabilities-section">
+        <div class="container">
+            <div class="text-center mb-5 pb-3" data-aos="fade-up">
+                <div class="section-eyebrow">EPC</div>
+                <h2 class="heading-serif fs-1 mb-3">Our Key Business Units</h2>
+                <p class="mx-auto text-muted" style="max-width: 600px;">
+                    We manage complete projects from engineering to construction, providing efficient supply chain
+                    solutions with quality and precision.
+                </p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Card Item -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="50">
+                    <div class="procurement-card shadow-sm">
+                        <div class="card-dot"></div>
+                        <p class="card-text">Complete piping, Valves, Fittings, Gaskets and fasteners of the different
+                            materials.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="procurement-card shadow-sm">
+                        <div class="card-dot"></div>
+                        <p class="card-text">Subsea Pipes, fittings, Valves Fasteners.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="150">
+                    <div class="procurement-card shadow-sm">
+                        <div class="card-dot"></div>
+                        <p class="card-text">Gas Turbine Driven Gas Compressors.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="50">
+                    <div class="procurement-card shadow-sm">
+                        <div class="card-dot"></div>
+                        <p class="card-text">Booster Pump, Hydrators, Emulsion Tanks Etc.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="procurement-card shadow-sm">
+                        <div class="card-dot"></div>
+                        <p class="card-text">Heat exchangers, Boilers, and Cooling towers, column etc.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="150">
+                    <div class="procurement-card shadow-sm">
+                        <div class="card-dot"></div>
+                        <p class="card-text">Safety, life saving and Firefighting equipment.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="50">
+                    <div class="procurement-card shadow-sm">
+                        <div class="card-dot"></div>
+                        <p class="card-text">OCTG and process pipes.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="procurement-card shadow-sm">
+                        <div class="card-dot"></div>
+                        <p class="card-text">Pumps, Compressors, Gearboxes etc.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="150">
+                    <div class="procurement-card shadow-sm">
+                        <div class="card-dot"></div>
+                        <p class="card-text">Meters and Metering Systems.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="50">
+                    <div class="procurement-card shadow-sm">
+                        <div class="card-dot"></div>
+                        <p class="card-text">Gas Compression System and other packaged units.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="procurement-card shadow-sm">
+                        <div class="card-dot"></div>
+                        <p class="card-text">ATEX Wellhead Control Panels.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="150">
+                    <div class="procurement-card shadow-sm">
+                        <div class="card-dot"></div>
+                        <p class="card-text">Marine Equipments and Engine Spares.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="50">
+                    <div class="procurement-card shadow-sm">
+                        <div class="card-dot"></div>
+                        <p class="card-text">Lifting Gears & Accessories.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="procurement-card shadow-sm">
+                        <div class="card-dot"></div>
+                        <p class="card-text">Firewater main Pumps and jockey Pumps.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="150">
+                    <div class="procurement-card shadow-sm">
+                        <div class="card-dot"></div>
+                        <p class="card-text">Gas Driven Generators & Diesel Driven Generators.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="50">
+                    <div class="procurement-card shadow-sm">
+                        <div class="card-dot"></div>
+                        <p class="card-text">Compressed Air System Package.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="procurement-card shadow-sm">
+                        <div class="card-dot"></div>
+                        <p class="card-text">Deep Well Pumps / Water Transfer / Booster Pumps.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="150">
+                    <div class="procurement-card shadow-sm">
+                        <div class="card-dot"></div>
+                        <p class="card-text">Aquifer Water Filter Package.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="50">
+                    <div class="procurement-card shadow-sm">
+                        <div class="card-dot"></div>
+                        <p class="card-text">Chlorination Package.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="procurement-card shadow-sm">
+                        <div class="card-dot"></div>
+                        <p class="card-text">Potable Water Bladder Tank.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="150">
+                    <div class="procurement-card shadow-sm">
+                        <div class="card-dot"></div>
+                        <p class="card-text">Air Compressor and Compressed Air Dryer Package.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="50">
+                    <div class="procurement-card shadow-sm">
+                        <div class="card-dot"></div>
+                        <p class="card-text">Potable Water Treatment Package.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="procurement-card shadow-sm">
+                        <div class="card-dot"></div>
+                        <p class="card-text">Vent Stack.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="150">
+                    <div class="procurement-card shadow-sm">
+                        <div class="card-dot"></div>
+                        <p class="card-text">Safety Shower & Eye Shower Package.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="50">
+                    <div class="procurement-card shadow-sm">
+                        <div class="card-dot"></div>
+                        <p class="card-text">Safety and PPE supplies.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="procurement-card shadow-sm">
+                        <div class="card-dot"></div>
+                        <p class="card-text">Chemical Supplies.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="cta-section">
+        <div class="container" data-aos="zoom-in">
+            <div class="cta-box">
+                <h2 class="heading-serif cta-heading">Ready To Start Your Next <span class="text-orange">Project?</span>
+                </h2>
+                <p class="mx-auto mb-5 text-white opacity-75"
+                    style="max-width: 700px; font-size: 1.1rem; line-height: 1.6;">
+                    Partner with VT Energies for reliable, top tier engineering and industrial solutions. Let's build
+                    what matters. We combine deep technical expertise with a commitment to safety, quality and
+                    innovation.
+                </p>
+                <a href="contact.html" class="btn-custom btn-orange text-white fs-6 py-3 px-5">Request A
+                    Consultation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-4 pe-lg-5">
+                    <a class="navbar-brand" href="index.html">
+                        <img src="assets/img/logo.png" alt="VT Energies"
+                            style="height: 100px; width: auto; display: block;">
+                    </a>
+                    <p class="mb-4 pe-lg-3 text-white opacity-50" style="font-size: 0.85rem; line-height: 1.6;">Your best
+                        solution partners, providing complete value through top-quality EPC service, marine logistics, and
+                        industrial maintenance. With a strong focus on quality, and timely project delivery, we ensure
+                        exceptional results from planning and execution to completion and ongoing support.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-orange fs-5"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="text-orange fs-5"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" class="text-orange fs-5"><i class="fa-brands fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+    
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="heading-serif text-white fs-6 mb-4">COMPANY</h5>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="about.html">HSE Policy</a></li>
+                        <li><a href="about.html">Nigerian Content</a></li>
+                    </ul>
+                </div>
+    
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="heading-serif text-white fs-6 mb-4">SERVICES</h5>
+                    <ul class="footer-links">
+                        <li><a href="haulage.html">Haulage Services</a></li>
+                        <li><a href="equipment.html">Equipment Leasing</a></li>
+                        <li><a href="repair.html">Repair & Maintenance</a></li>
+                        <li><a href="fabrication.html">Fabrication & Construction</a></li>
+                    </ul>
+                </div>
+    
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="heading-serif text-white fs-6 mb-4">CONTACT US</h5>
+                    <ul class="footer-links footer-contact">
+                        <li>
+                            <i class="fa-solid fa-location-dot mt-1"></i>
+                            <span>Head office: GV45, Close 6 Green Village Estate, Elelewon/Apajo, Rivers State</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-map-pin mt-1"></i>
+                            <span>Workshop: 12/14 Ekwu Okah Ave, Odani off Eleme Onne Rd, Port Harcourt.</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-phone mt-1"></i>
+                            <span>TELL: 08038326700, 08075089171</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-envelope mt-1"></i>
+                            <span>Email: info@vtenergies.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+    
+            <div class="row footer-bottom"
+                style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; margin-top: 3rem;">
+                <div class="col-md-6 text-center text-md-start text-white opacity-50" style="font-size: 0.85rem;">
+                    <span class="text-orange">&copy;</span> 2026 VROI-TREZ Energies Limited (RC 7025466).
+                </div>
+                <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
+                    <a href="#" class="text-white opacity-50 text-decoration-none me-3" style="font-size: 0.85rem;">Privacy
+                        Policy</a>
+                    <span class="text-white opacity-50">|</span>
+                    <a href="#" class="text-white opacity-50 text-decoration-none ms-3" style="font-size: 0.85rem;">Terms &
+                        Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            AOS.init({once: true, offset: 30, duration: 800, easing: 'ease-in-out'});
+
+            // Navbar shadow on scroll
+            const navbar = document.getElementById('mainNav');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.style.padding = '0.5rem 0';
+                    navbar.style.boxShadow = '0 4px 20px rgba(0,0,0,0.05)';
+                } else {
+                    navbar.style.padding = '1rem 0';
+                    navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.03)';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

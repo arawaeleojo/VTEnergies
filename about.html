@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VT Energies | Complete Value. Exceptional Service.</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        /* --- CORE VARIABLES --- */
+        :root {
+            --black: #000000;
+            --charcoal: #111111;
+            --grey-text: #666666;
+            --bg-light: #FDFDFD;
+            --orange: #F05A28;
+            --white: #FFFFFF;
+            --shadow-card: 0 12px 40px rgba(0, 0, 0, 0.06);
+            --shadow-heavy: 0 20px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        /* --- GLOBAL TYPOGRAPHY --- */
+        html,
+        body {
+            overflow-x: hidden !important;
+            width: 100%;
+            font-family: 'Inter', sans-serif;
+            color: var(--grey-text);
+            background-color: var(--bg-light);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        .heading-serif {
+            font-family: 'Playfair Display', serif;
+            color: var(--black);
+        }
+
+        .text-orange {
+            color: var(--orange) !important;
+        }
+
+        .bg-orange {
+            background-color: var(--orange) !important;
+        }
+
+        .text-black {
+            color: var(--black) !important;
+        }
+
+        .bg-black {
+            background-color: var(--black) !important;
+        }
+
+        /* --- BUTTONS --- */
+        .btn-custom {
+            display: inline-block;
+            padding: 0.8rem 2.2rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border: none;
+        }
+
+        .btn-orange {
+            background-color: var(--orange);
+            color: var(--white);
+        }
+
+        .btn-orange:hover {
+            background-color: #d94d1f;
+            color: var(--white);
+        }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: -0.5px;
+            color: var(--grey-900);
+        }
+
+        .nav-link {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--black) !important;
+            margin: 0 12px;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--orange) !important;
+        }
+
+        /* --- SECTION EYEBROWS (WITH LINES) --- */
+        .section-eyebrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: var(--orange);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .section-eyebrow::before,
+        .section-eyebrow::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 1px;
+            background-color: var(--orange);
+            opacity: 0.5;
+        }
+
+        /* Dropdown Styling */
+        .dropdown-menu.dark-dropdown {
+            background-color: var(--charcoal);
+            border: none;
+            border-radius: 8px;
+            padding: 1rem 0;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            min-width: 260px;
+        }
+
+        .dark-dropdown .dropdown-item {
+            color: #d1d1d1;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            padding: 0.7rem 1.5rem;
+            transition: all 0.2s ease;
+            position: relative;
+            background: transparent;
+        }
+
+        .dark-dropdown .dropdown-item:hover,
+        .dark-dropdown .dropdown-item.active {
+            color: var(--white);
+            background-color: rgba(255, 255, 255, 0.03);
+            padding-left: 1.8rem;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero-wrapper {
+            min-height: 75vh;
+            border-radius: 24px;
+            /* Gives the rounded look from Figma */
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-top: 120px;
+            /* Separates from the fixed navbar */
+            box-shadow: var(--shadow-card);
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center bottom;
+            z-index: 1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.65);
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            padding: 4rem 2rem;
+        }
+
+        .hero-badge {
+            background-color: var(--orange);
+            color: var(--white);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            padding: 0.4rem 1.2rem;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            color: var(--white);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-scroll-btn {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            width: 45px;
+            height: 45px;
+            background-color: var(--orange);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-scroll-btn:hover {
+            transform: translateY(5px);
+            color: var(--white);
+        }
+
+        /* --- MISSION & VISION CARDS --- */
+        .mv-card {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: var(--shadow-card);
+            height: 100%;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+        }
+
+        .mv-icon {
+            font-size: 2.5rem;
+            color: var(--orange);
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- CORE VALUES --- */
+        .value-pill {
+            padding: 0.8rem 2.5rem;
+            border-radius: 50px;
+            border: 1px solid #EAEAEA;
+            background-color: var(--white);
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--charcoal);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+            letter-spacing: 1px;
+        }
+
+        /* --- DIRECTOR'S DESK SECTION (UPDATED) --- */
+        .director-section {
+            position: relative;
+            min-height: 700px;
+            background-image: url('https://plus.unsplash.com/premium_photo-1661717839556-2876d6d86401?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDl8fGElMjBibGFjayUyMHdvbWFuJTIwaG9sZGluZyUyMGxhcHRvcHxlbnwwfHwwfHx8MA%3D%3D');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            /* Optional: adds a nice parallax effect */
+        }
+
+        .director-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            /* Slight darkening for readability */
+            z-index: 1;
+        }
+
+        .director-content-wrapper {
+            position: relative;
+            z-index: 2;
+        }
+
+        .director-white-card {
+            background: var(--white);
+            padding: 3rem;
+            max-width: 420px;
+            box-shadow: var(--shadow-heavy);
+            border-radius: 4px;
+        }
+
+        .director-dark-panel {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 4rem 3.5rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: var(--shadow-heavy);
+            border-radius: 8px;
+        }
+
+        .director-d-square {
+            width: 45px;
+            height: 45px;
+            background-color: var(--orange);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 1.3rem;
+            border-radius: 4px;
+        }
+
+        /* --- CORPORATE POLICY CARDS --- */
+        .policy-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-card);
+            height: 100%;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .policy-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .policy-icon-wrapper {
+            width: 48px;
+            height: 48px;
+            background-color: #fcf1ed;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .policy-icon-wrapper i {
+            color: var(--orange);
+            font-size: 1.2rem;
+        }
+
+        .policy-card-title {
+            font-size: 1.6rem;
+            margin: 0;
+            position: relative;
+            padding-bottom: 0.4rem;
+        }
+
+        .policy-card-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--orange);
+        }
+
+        .policy-desc {
+            background-color: #fcfcfc;
+            padding: 1.2rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            margin: 1.5rem 0;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .policy-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .policy-list-item {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            margin-bottom: 1.2rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .policy-list-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .policy-list-number {
+            background-color: var(--orange);
+            color: var(--white);
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        .policy-interactive-btn {
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background-color: var(--orange);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(240, 90, 40, 0.3);
+            cursor: pointer;
+        }
+
+        /* --- CTA SECTION --- */
+        .cta-container {
+            background-color: var(--black);
+            border-radius: 16px;
+            /* Fully rounded now */
+            padding: 5rem 2rem;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .cta-heading {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+
+        /* --- FOOTER --- */
+        .site-footer {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 4rem 0 2rem 0;
+        }
+
+        .footer-heading {
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+
+        .footer-text {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.85rem;
+            line-height: 1.8;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: color 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--orange);
+        }
+
+        .footer-contact li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        .footer-contact i {
+            color: var(--orange);
+            margin-top: 0.3rem;
+        }
+
+        .social-icons a {
+            color: var(--orange);
+            font-size: 1.2rem;
+            margin-right: 1.2rem;
+            transition: opacity 0.2s;
+        }
+
+        .social-icons a:hover {
+            opacity: 0.8;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            margin-top: 3rem;
+        }
+
+        /* --- RESPONSIVENESS --- */
+        @media (max-width: 991px) {
+            .hero-title {
+                font-size: 3.2rem;
+            }
+
+            .director-dark-panel {
+                padding: 3rem 2rem;
+                margin-top: 2rem;
+            }
+
+            .director-white-card {
+                max-width: 100%;
+                padding: 2rem;
+            }
+
+            .cta-heading {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-content {
+                padding: 3rem 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="assets/img/logo.png" alt="VT Energies" style="height: 60px; width: auto; display: block;">
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fa-solid fa-bars fs-2 text-dark"></i>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav align-items-center mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="about.html">About Us</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Services
+                        </a>
+                        <ul class="dropdown-menu dark-dropdown shadow">
+                            <li><a class="dropdown-item" href="general-procurement.html">General Procurement</a></li>
+                            <li><a class="dropdown-item" href="haulage.html">Haulage Services</a></li>
+                            <li><a class="dropdown-item" href="equipment.html">Equipment Leasing</a></li>
+                            <li><a class="dropdown-item" href="repair.html">Repair & Maintenance</a></li>
+                            <li><a class="dropdown-item" href="fabrication.html">Fabrication &
+                                    Construction</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="partner.html">Partners</a></li>
+                    <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+                </ul>
+                <div class="d-none d-lg-block">
+                    <a href="contact.html" class="btn-custom btn-orange">Contact us</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION (Updated to be contained/rounded with margin) -->
+    <header class="container" id="home">
+        <div class="hero-wrapper" data-aos="fade-up">
+            <div class="hero-bg"></div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <span class="hero-badge text-uppercase">CORPORATE OVERVIEW</span>
+                <h1 class="hero-title heading-serif">A Global Name in <br> Energy & Logistics.</h1>
+                <p class="text-white opacity-75 fs-5 mx-auto" style="max-width: 600px;">
+                    Discover the standards, Vision, and operational excellence that drive VROI-TREZ Energies Limited.
+                </p>
+            </div>
+            <a href="#whoweare" class="hero-scroll-btn">
+                <i class="fa-solid fa-angles-down"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- WHO WE ARE -->
+    <section id="whoweare" class="py-5 bg-white mt-4">
+        <div class="container py-5">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <div class="section-eyebrow">WHO WE ARE</div>
+                <h2 class="heading-serif fs-1">Complete Value. Exceptional Service.</h2>
+            </div>
+
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <p>VROI-TREZ Energies (VT Energies) is a limited liability company, incorporated under the laws of
+                        the federal Republic of Nigeria with registered number RC7025466.</p>
+                    <p>We specialize in procurement, Engineering, construction, Fabrication, Manpower Training and
+                        Development, Marine Equipment Supply, Scaffolding, Installation and Commissioning Services and
+                        Maintenance & Value Repair.</p>
+                    <p>Our goal is to exceed the expectation of every client by offering standard, exceptional and value
+                        added services in terms of service reliability and a cost efficient alternative, whilst also
+                        complying with safe work procedure and other requisite standards.</p>
+                    <p class="mb-0">We place premium on good company-community relationship, in other to reduce or
+                        eliminate subsidiary problems that may arise from our operations.</p>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="rounded-4 overflow-hidden shadow-sm" style="background-color: #EFEFEF;">
+                        <img src="assets/img/founder.jpeg"
+                            alt="Corporate Executive" class="img-fluid w-100" style="object-fit: cover; height: 500px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MISSION & VISION -->
+    <section class="py-5 bg-light">
+        <div class="container py-4">
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-5 col-md-6" data-aos="fade-up">
+                    <div class="mv-card">
+                        <i class="fa-solid fa-bullseye mv-icon"></i>
+                        <h3 class="heading-serif mb-3">MISSION</h3>
+                        <p class="mb-0 fs-6">To consistently deliver top-quality, innovative and cost-effective services
+                            to our clients through value-adding strategies and ensure strict adherence to safe work
+                            practices.</p>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="mv-card">
+                        <i class="fa-regular fa-eye mv-icon"></i>
+                        <h3 class="heading-serif mb-3">VISION</h3>
+                        <p class="mb-0 fs-6">To create a dependable global name in the Oil & Gas, Marine and Energy
+                            industry through the ues of cutting edge technology, equipment, and a well-experienced
+                            workforce.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CORE VALUES -->
+    <section class="py-5 bg-white">
+        <div class="container text-center py-5">
+            <div data-aos="fade-up">
+                <div class="section-eyebrow">THE STANDARD</div>
+                <h2 class="heading-serif fs-1 mb-5">Our Core Values</h2>
+            </div>
+            <div class="d-flex justify-content-center flex-wrap gap-3" data-aos="fade-up" data-aos-delay="100">
+                <span class="value-pill">INTEGRITY</span>
+                <span class="value-pill">TEAM WORK</span>
+                <span class="value-pill">EXCELLENCE</span>
+                <span class="value-pill">DEPENDABLE</span>
+                <span class="value-pill">RELIABILITY</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- DIRECTOR'S DESK (Updated to use Image as Section Background) -->
+    <section class="director-section py-5 my-5">
+        <div class="director-overlay"></div>
+        <div class="container director-content-wrapper h-100 py-5">
+            <div class="row h-100 align-items-center g-4">
+
+                <!-- Left Content: Floating White Card -->
+                <div class="col-lg-6 d-flex align-items-end h-100" style="min-height: 400px;" data-aos="fade-right">
+                    <div class="director-white-card mb-4 mb-lg-0">
+                        <h3 class="heading-serif fs-1 mb-3" style="line-height: 1.2;">LEARN IT.<br>DO IT.</h3>
+                        <p class="mb-0 fs-6 text-muted" style="line-height: 1.7;">
+                            We believe in continuous learning and practical execution. That's how we create lasting
+                            impact for our clients and the environment.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right Content: Dark Panel -->
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="director-dark-panel">
+                        <div class="d-flex align-items-center gap-3 mb-4">
+                            <div class="director-d-square">D</div>
+                            <h3 class="heading-serif text-white mb-0 fs-4">From the <br><span
+                                    class="text-orange">Director's</span> Desk</h3>
+                        </div>
+
+                        <p class="fs-5 mb-5 opacity-75" style="line-height: 1.8;">
+                            The deployment of best services is fundamental to us towards the achievement of improved
+                            operational performance for our valued client reducing the environmental impact in all our
+                            operations.
+                        </p>
+
+                        <div class="d-flex align-items-center gap-4">
+                            <div class="d-flex align-items-center justify-content-center border border-secondary rounded-circle flex-shrink-0"
+                                style="width: 60px; height: 60px;">
+                                <i class="fa-solid fa-users text-orange fs-4"></i>
+                            </div>
+                            <p class="mb-0 opacity-75 fs-6" style="line-height: 1.6;">
+                                We align ourselves with international best practices and are committed to delivering
+                                nothing less than <strong>EXCELLENT</strong> service.
+                            </p>
+                        </div>
+
+                        <div class="text-end mt-4 pt-2">
+                            <a href="#"
+                                class="btn btn-orange rounded-circle p-0 d-inline-flex align-items-center justify-content-center"
+                                style="width: 45px; height: 45px;">
+                                <i class="fa-solid fa-chevron-up"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CORPORATE POLICIES -->
+    <section class="py-5 my-5 bg-white">
+        <div class="container py-4">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <div class="section-eyebrow">COMPLIANCE & SAFETY</div>
+                <h2 class="heading-serif fs-1">Corporate Policies</h2>
+            </div>
+
+            <div class="row g-4">
+                <!-- Training & Manpower -->
+                <div class="col-lg-6" data-aos="fade-up">
+                    <div class="policy-card">
+                        <div class="d-flex align-items-center gap-3 mb-4">
+                            <div class="policy-icon-wrapper"><i class="fa-solid fa-graduation-cap"></i></div>
+                            <h3 class="policy-card-title heading-serif">Training & Manpower</h3>
+                        </div>
+                        <div class="policy-desc">
+                            <i class="fa-solid fa-users text-orange fs-4"></i>
+                            <span>Training is an essential tool for safe operations. it enhances motivation, high
+                                morale, and high productivity.</span>
+                        </div>
+                        <ul class="policy-list">
+                            <li class="policy-list-item">
+                                <div class="policy-list-number">1</div>
+                                <div class="policy-list-text"><strong>Provide employees</strong> with the right mix of
+                                    skills.</div>
+                            </li>
+                            <li class="policy-list-item">
+                                <div class="policy-list-number">2</div>
+                                <div class="policy-list-text"><strong>Make our staff the best</strong> in their chosen
+                                    fields.</div>
+                            </li>
+                            <li class="policy-list-item">
+                                <div class="policy-list-number">3</div>
+                                <div class="policy-list-text"><strong>Personal monitoring</strong> and post-training
+                                    support.</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- HSE Policy -->
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="policy-card">
+                        <div class="d-flex align-items-center gap-3 mb-4">
+                            <div class="policy-icon-wrapper"><i class="fa-solid fa-shield-heart"></i></div>
+                            <h3 class="policy-card-title heading-serif">HSE Policy</h3>
+                        </div>
+                        <div class="policy-desc">
+                            <i class="fa-solid fa-users text-orange fs-4"></i>
+                            <span>VTEnergies is committed to protecting the health and safety of all people involved
+                                with our activities, achieving a safe and incident-free workplace.</span>
+                        </div>
+                        <ul class="policy-list">
+                            <li class="policy-list-item">
+                                <div class="policy-list-number">1</div>
+                                <div class="policy-list-text"><strong>Pursue the goal of zero harm</strong> to people
+                                    and assets.</div>
+                            </li>
+                            <li class="policy-list-item">
+                                <div class="policy-list-number">2</div>
+                                <div class="policy-list-text"><strong>Active risk management</strong> and hazard
+                                    mitigation.</div>
+                            </li>
+                            <li class="policy-list-item">
+                                <div class="policy-list-number">3</div>
+                                <div class="policy-list-text"><strong>Ensure HSE is integral</strong> throughout all
+                                    project phases.</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Environmental & Waste -->
+                <div class="col-lg-6" data-aos="fade-up">
+                    <div class="policy-card">
+                        <div class="d-flex align-items-center gap-3 mb-4">
+                            <div class="policy-icon-wrapper"><i class="fa-solid fa-leaf"></i></div>
+                            <h3 class="policy-card-title heading-serif">Environmental & Waste</h3>
+                        </div>
+                        <div class="policy-desc">
+                            <i class="fa-solid fa-users text-orange fs-4"></i>
+                            <span>We conduct our activities to achieve maximum protecting of the environment. E.I.A is
+                                conducted on an as-needed basis.</span>
+                        </div>
+                        <ul class="policy-list">
+                            <li class="policy-list-item">
+                                <div class="policy-list-number">1</div>
+                                <div class="policy-list-text"><strong>Prompt reporting</strong> and follow-up of
+                                    negative interference.</div>
+                            </li>
+                            <li class="policy-list-item">
+                                <div class="policy-list-number">2</div>
+                                <div class="policy-list-text"><strong>Assess the source, type,</strong> and quantity of
+                                    waste generated.</div>
+                            </li>
+                            <li class="policy-list-item">
+                                <div class="policy-list-number">3</div>
+                                <div class="policy-list-text"><strong>Strict compliance</strong> with governmental
+                                    regulations.</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Security & Auditing -->
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="policy-card">
+                        <div class="d-flex align-items-center gap-3 mb-4">
+                            <div class="policy-icon-wrapper"><i class="fa-solid fa-lock"></i></div>
+                            <h3 class="policy-card-title heading-serif">Security & Auditing</h3>
+                        </div>
+                        <div class="policy-desc">
+                            <i class="fa-solid fa-users text-orange fs-4"></i>
+                            <span>Prompt auditing is the center of our accident preventing strategy protection of human
+                                and material resources is priority.</span>
+                        </div>
+                        <ul class="policy-list">
+                            <li class="policy-list-item">
+                                <div class="policy-list-number">1</div>
+                                <div class="policy-list-text"><strong>Routine and non-routine audits</strong> of work
+                                    environments.</div>
+                            </li>
+                            <li class="policy-list-item">
+                                <div class="policy-list-number">2</div>
+                                <div class="policy-list-text"><strong>Full-time surveillance teams</strong> in all sites
+                                    and transit.</div>
+                            </li>
+                            <li class="policy-list-item">
+                                <div class="policy-list-number">3</div>
+                                <div class="policy-list-text"><strong>Corporate journey management</strong> guide for
+                                    all movement.</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Nigerian Content -->
+                <div class="col-lg-6" data-aos="fade-up">
+                    <div class="policy-card">
+                        <div class="d-flex align-items-center gap-3 mb-4">
+                            <div class="policy-icon-wrapper"><i class="fa-solid fa-flag"></i></div>
+                            <h3 class="policy-card-title heading-serif">Nigerian Content</h3>
+                        </div>
+                        <div class="policy-desc">
+                            <i class="fa-solid fa-users text-orange fs-4"></i>
+                            <span>We are committed to processes and technologies that safeguard the Nigerian environment
+                                and encourage local employment.</span>
+                        </div>
+                        <ul class="policy-list">
+                            <li class="policy-list-item">
+                                <div class="policy-list-number">1</div>
+                                <div class="policy-list-text"><strong>Provide near and long-term benefit</strong> to
+                                    host communities.</div>
+                            </li>
+                            <li class="policy-list-item">
+                                <div class="policy-list-number">2</div>
+                                <div class="policy-list-text"><strong>Achieve high levels of Nigerian</strong> in
+                                    project scopes.</div>
+                            </li>
+                            <li class="policy-list-item">
+                                <div class="policy-list-number">3</div>
+                                <div class="policy-list-text"><strong>Invest in effective knowledge</strong> and
+                                    Technology Transfer.</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Health & Habits -->
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="policy-card">
+                        <div class="d-flex align-items-center gap-3 mb-4">
+                            <div class="policy-icon-wrapper"><i class="fa-solid fa-shield-halved"></i></div>
+                            <h3 class="policy-card-title heading-serif">Health & Habits</h3>
+                        </div>
+                        <div class="policy-desc position-relative pe-5">
+                            <i class="fa-solid fa-users text-orange fs-4"></i>
+                            <span>We enforce strict rules regarding workplace habits to protect our personnel from
+                                unnecessary exposure to hazards.</span>
+                            <div class="policy-interactive-btn">
+                                <i class="fa-solid fa-chevron-up"></i>
+                            </div>
+                        </div>
+                        <ul class="policy-list">
+                            <li class="policy-list-item">
+                                <div class="policy-list-number">1</div>
+                                <div class="policy-list-text"><strong>Zero tolerance</strong> for drugs and alcohol on
+                                    site.</div>
+                            </li>
+                            <li class="policy-list-item">
+                                <div class="policy-list-number">2</div>
+                                <div class="policy-list-text"><strong>Smoking is strictly prohibited</strong> in all
+                                    work areas.</div>
+                            </li>
+                            <li class="policy-list-item">
+                                <div class="policy-list-number">3</div>
+                                <div class="policy-list-text"><strong>Mandatory seat belt use</strong> in all company
+                                    vehicles.</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION (Updated to have margin bottom to separate from footer) -->
+    <section class="container mt-5 pt-4 mb-5 pb-5">
+        <div class="cta-container shadow-lg" data-aos="zoom-in">
+            <h2 class="cta-heading heading-serif">READY TO START YOUR NEXT <span class="text-orange">PROJECT?</span>
+            </h2>
+            <p class="mb-5 mx-auto text-white opacity-75"
+                style="max-width: 650px; font-size: 1.05rem; line-height: 1.8;">
+                Partner with VT Energies for reliable, top tier engineering and industrial solutions. Let's build what
+                matters. we combine deep technical expertise with a commitment to safety, quality and innovation.
+            </p>
+            <a href="contact.html" class="btn-custom btn-orange px-5 py-3 fs-6">REQUEST A CONSULTATION</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-4 pe-lg-5">
+                    <a class="navbar-brand" href="index.html">
+                        <img src="assets/img/logo.png" alt="VT Energies"
+                            style="height: 100px; width: auto; display: block;">
+                    </a>
+                    <p class="mb-4 pe-lg-3 text-white opacity-50" style="font-size: 0.85rem; line-height: 1.6;">Your best
+                        solution partners, providing complete value through top-quality EPC service, marine logistics, and
+                        industrial maintenance. With a strong focus on quality, and timely project delivery, we ensure
+                        exceptional results from planning and execution to completion and ongoing support.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-orange fs-5"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="text-orange fs-5"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" class="text-orange fs-5"><i class="fa-brands fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+    
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="heading-serif text-white fs-6 mb-4">COMPANY</h5>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="about.html">HSE Policy</a></li>
+                        <li><a href="about.html">Nigerian Content</a></li>
+                    </ul>
+                </div>
+    
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="heading-serif text-white fs-6 mb-4">SERVICES</h5>
+                    <ul class="footer-links">
+                        <li><a href="haulage.html">Haulage Services</a></li>
+                        <li><a href="equipment.html">Equipment Leasing</a></li>
+                        <li><a href="repair.html">Repair & Maintenance</a></li>
+                        <li><a href="fabrication.html">Fabrication & Construction</a></li>
+                    </ul>
+                </div>
+    
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="heading-serif text-white fs-6 mb-4">CONTACT US</h5>
+                    <ul class="footer-links footer-contact">
+                        <li>
+                            <i class="fa-solid fa-location-dot mt-1"></i>
+                            <span>Head office: GV45, Close 6 Green Village Estate, Elelewon/Apajo, Rivers State</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-map-pin mt-1"></i>
+                            <span>Workshop: 12/14 Ekwu Okah Ave, Odani off Eleme Onne Rd, Port Harcourt.</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-phone mt-1"></i>
+                            <span>TELL: 08038326700, 08075089171</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-envelope mt-1"></i>
+                            <span>Email: info@vtenergies.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+    
+            <div class="row footer-bottom"
+                style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; margin-top: 3rem;">
+                <div class="col-md-6 text-center text-md-start text-white opacity-50" style="font-size: 0.85rem;">
+                    <span class="text-orange">&copy;</span> 2026 VROI-TREZ Energies Limited (RC 7025466).
+                </div>
+                <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
+                    <a href="#" class="text-white opacity-50 text-decoration-none me-3" style="font-size: 0.85rem;">Privacy
+                        Policy</a>
+                    <span class="text-white opacity-50">|</span>
+                    <a href="#" class="text-white opacity-50 text-decoration-none ms-3" style="font-size: 0.85rem;">Terms &
+                        Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            AOS.init({
+                once: true,
+                offset: 30,
+                duration: 800,
+                easing: 'ease-in-out',
+            });
+
+            const navbar = document.getElementById('mainNav');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.style.padding = '0.5rem 0';
+                    navbar.style.boxShadow = '0 4px 20px rgba(0,0,0,0.05)';
+                } else {
+                    navbar.style.padding = '1rem 0';
+                    navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.03)';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

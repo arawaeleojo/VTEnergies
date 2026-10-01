@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haulage Services | VT Energies</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        /* --- CORE VARIABLES --- */
+        :root {
+            --black: #000000;
+            --charcoal: #111111;
+            --hero-bg: #333333;
+            --grey-text: #666666;
+            --bg-light: #FDFDFD;
+            --bg-gray: #F5F5F5;
+            --orange: #F05A28;
+            --white: #FFFFFF;
+            --border-color: #EBEBEB;
+            --shadow-card: 0 12px 40px rgba(0, 0, 0, 0.04);
+            --shadow-hover: 0 16px 50px rgba(0, 0, 0, 0.08);
+        }
+
+        /* --- GLOBAL TYPOGRAPHY --- */
+        html,
+        body {
+            overflow-x: hidden !important;
+            width: 100%;
+            font-family: 'Inter', sans-serif;
+            color: var(--grey-text);
+            background-color: var(--bg-light);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        .heading-serif {
+            font-family: 'Playfair Display', serif;
+            color: var(--black);
+        }
+
+        .text-orange {
+            color: var(--orange) !important;
+        }
+
+        .bg-orange {
+            background-color: var(--orange) !important;
+        }
+
+        /* --- BUTTONS --- */
+        .btn-custom {
+            display: inline-block;
+            padding: 0.8rem 2.2rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border: none;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-orange {
+            background-color: var(--orange);
+            color: var(--white);
+        }
+
+        .btn-orange:hover {
+            background-color: #d94d1f;
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand span {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            letter-spacing: -1px;
+        }
+
+        .nav-link {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--black) !important;
+            margin: 0 12px;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--orange) !important;
+        }
+
+        /* Dropdown Styling */
+        .dropdown-menu.dark-dropdown {
+            background-color: var(--charcoal);
+            border: none;
+            border-radius: 8px;
+            padding: 1rem 0;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            min-width: 260px;
+        }
+
+        .dark-dropdown .dropdown-item {
+            color: #d1d1d1;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            padding: 0.7rem 1.5rem;
+            transition: all 0.2s ease;
+            position: relative;
+            background: transparent;
+        }
+
+        .dark-dropdown .dropdown-item:hover,
+        .dark-dropdown .dropdown-item.active {
+            color: var(--white);
+            background-color: rgba(255, 255, 255, 0.03);
+            padding-left: 1.8rem;
+        }
+
+        /* --- HERO SECTION --- */
+        .service-hero {
+    min-height: 75vh;
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    margin-top: 120px;
+    margin-bottom: 5rem;
+
+    box-shadow: var(--shadow-card);
+
+    background-image: url('https://media.istockphoto.com/id/2230103885/photo/american-style-truck-on-freeway-pulling-load-transportation-theme-3d-illustration.webp?a=1&b=1&s=612x612&w=0&k=20&c=XY8SnDHOzEsFXZKwwx7hHMRmZ0-NUuAGnh8ejIElUkw=');
+    background-size: cover;
+    background-position: center;
+}
+
+        .service-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.65);
+            z-index: 1;
+        }
+
+        .hero-badge {
+            background-color: var(--orange);
+            color: var(--white);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            color: var(--white);
+            font-size: 3.5rem;
+            max-width: 800px;
+            margin: 0 auto 1.5rem auto;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        /* --- SECTION HEADER --- */
+        .section-eyebrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: var(--orange);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .section-eyebrow::before,
+        .section-eyebrow::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 1px;
+            background-color: var(--orange);
+            opacity: 0.5;
+        }
+
+        /* --- SERVICE CARDS --- */
+        .service-card {
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-5px);
+        }
+
+        .service-img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+        }
+
+        .service-content {
+            padding: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            flex-grow: 1;
+        }
+
+        .service-icon {
+            color: var(--orange);
+            font-size: 1.8rem;
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+
+        .service-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-desc {
+            font-size: 0.9rem;
+            color: var(--grey-text);
+            margin-bottom: 0;
+            line-height: 1.5;
+        }
+
+        /* --- WHY WORK WITH US CARD --- */
+        .feature-card {
+            background-color: var(--bg-gray);
+            border-radius: 12px;
+            padding: 2.5rem;
+            height: 100%;
+            border: 1px solid var(--border-color);
+        }
+
+        .feature-title {
+            color: var(--orange);
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-title i {
+            font-size: 1.4rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            color: var(--charcoal);
+            line-height: 1.5;
+        }
+
+        .feature-icon-wrapper {
+            background-color: rgba(240, 90, 40, 0.1);
+            color: var(--orange);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* --- CTA SECTION --- */
+        .cta-section {
+            padding: 5rem 0;
+            background-color: var(--bg-light);
+        }
+
+        .cta-box {
+            background-color: var(--black);
+            border-radius: 16px;
+            padding: 5rem 3rem;
+            text-align: center;
+            color: var(--white);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .cta-heading {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-heading .text-orange {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            text-transform: none;
+        }
+
+        /* --- FOOTER --- */
+        .site-footer {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 4rem 0 2rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--orange);
+        }
+
+        .footer-contact li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        .footer-contact i {
+            color: var(--orange);
+            margin-top: 0.3rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/img/logo.png" alt="VT Energies" style="height: 60px; width: auto; display: block;">
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fa-solid fa-bars fs-2 text-dark"></i>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav align-items-center mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Services
+                        </a>
+                        <ul class="dropdown-menu dark-dropdown shadow">
+                            <li><a class="dropdown-item" href="general-procurement.html">General Procurement</a></li>
+                            <li><a class="dropdown-item active" href="haulage.html">Haulage Services</a></li>
+                            <li><a class="dropdown-item" href="equipment.html">Equipment Leasing</a></li>
+                            <li><a class="dropdown-item" href="repair.html">Repair & Maintenance</a></li>
+                            <li><a class="dropdown-item" href="fabrication.html">Fabrication & Construction</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="partner.html">Partners</a></li>                   
+                    <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+                </ul>
+                <div class="d-none d-lg-block">
+                    <a href="contact.html" class="btn-custom btn-orange text-white">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header id="home">
+        <div class="container">
+            <section class="service-hero" data-aos="fade-down">
+                <div class="position-relative" style="z-index: 2;">
+                    <span class="hero-badge">OUR CORE SERVICES</span>
+    
+                    <h1 class="hero-title heading-serif">
+                        Haulage services that deliver your logistics.
+                    </h1>
+    
+                    <p class="hero-subtitle">
+                        Big load or small load, we've got you covered. We provide fast, secure, and
+                        affordable haulage for construction materials, containers, and commercial goods across Nigeria.
+                    </p>
+                </div>
+            </section>
+        </div>
+    </header>
+
+    <!-- MAIN SERVICES GRID -->
+    <section class="container mb-5">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <div class="section-eyebrow">HAULAGE</div>
+            <h2 class="heading-serif fs-1 mb-3">Moving what matters across states.</h2>
+            <p class="mx-auto text-muted" style="max-width: 600px;">
+                We offer end-to-end haulage solutions with a fleet built for heavy duty. Timely delivery. Secure
+                handling.
+            </p>
+        </div>
+
+        <div class="row g-4">
+            <!-- Card 1 -->
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="50">
+                <div class="service-card">
+                    <img src="https://media.istockphoto.com/id/2245434296/photo/bright-red-bonnet-big-rig-semi-truck-with-chrome-accessories-transporting-fastened-lumber.webp?a=1&b=1&s=612x612&w=0&k=20&c=u9o0mUr_lZL1I6vRZb-xqDtWQSPSR49KSE0zT-fP4DM="
+                        alt="Land Haulage Trucks" class="service-img">
+                    <div class="service-content">
+                        <i class="fa-solid fa-truck service-icon"></i>
+                        <div>
+                            <h3 class="service-title heading-serif">Land Haulage</h3>
+                            <p class="service-desc">Safe and timely transport of goods across local and long distance
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Card 2 -->
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1755992850396-94a840682f4c?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        alt="Marine Haulage Container Ship" class="service-img">
+                    <div class="service-content">
+                        <i class="fa-solid fa-ship service-icon"></i>
+                        <div>
+                            <h3 class="service-title heading-serif">Marine Haulage</h3>
+                            <p class="service-desc">Secure sea transportation for bulk and general cargo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Card 3 -->
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="150">
+                <div class="service-card">
+                    <img src="https://plus.unsplash.com/premium_photo-1661854704184-679405ea7ff8?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzN8fGNoZW1pY2FsJTIwc3VwcGx5fGVufDB8fDB8fHww"
+                        alt="Chemical Supply Industrial Pipes" class="service-img">
+                    <div class="service-content">
+                        <i class="fa-solid fa-flask service-icon"></i>
+                        <div>
+                            <h3 class="service-title heading-serif">Chemical Supply</h3>
+                            <p class="service-desc">Safe and timely transport of goods across local and long distance
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Card 4 -->
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1764835746713-34a671e73569?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OTB8fGluZHVzdHJpYWwlMjBtYXRlcmlhbHN8ZW58MHx8MHx8fDA%3D"
+                        alt="Industrial Material Steel Pipes" class="service-img">
+                    <div class="service-content">
+                        <i class="fa-solid fa-cubes service-icon"></i>
+                        <div>
+                            <h3 class="service-title heading-serif">Industrial Material</h3>
+                            <p class="service-desc">Supply and transport of quality industrial materials.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Card 5 -->
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="250">
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1771974323395-42bc8993c64d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzB8fGhlYXZ5JTIwZHV0eSUyMGVxdWlwbWVudHxlbnwwfHwwfHx8MA%3D%3D"
+                        alt="Heavy Duty Equipment" class="service-img">
+                    <div class="service-content">
+                        <i class="fa-solid fa-tractor service-icon"></i>
+                        <div>
+                            <h3 class="service-title heading-serif">Heavy Duty Equipment</h3>
+                            <p class="service-desc">Specialized transport for heavy and oversized cargo</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Card 6 -->
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
+                <div class="service-card">
+                    <img src="https://media.istockphoto.com/id/1332818521/photo/oil-change-fill-up-with-new-oil.webp?a=1&b=1&s=612x612&w=0&k=20&c=YBzMFYtHshIzrqJXsufzAZCfzsWW4vGIjiRxLPOj9vU="
+                        alt="Lubricant Drums" class="service-img">
+                    <div class="service-content">
+                        <i class="fa-solid fa-oil-can service-icon"></i>
+                        <div>
+                            <h3 class="service-title heading-serif">Lubricant</h3>
+                            <p class="service-desc">High-performance lubricants for all industrial needs.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Card 7 -->
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="350">
+                <div class="service-card">
+                    <img src="https://media.istockphoto.com/id/1421951888/photo/fuels-at-a-petrol-station.webp?a=1&b=1&s=612x612&w=0&k=20&c=U4T0wzFgwfJGaxhZ_jegM5KElD-d0CBg7TtriqWatXc="
+                        alt="Petroleum Product Nozzles" class="service-img">
+                    <div class="service-content">
+                        <i class="fa-solid fa-gas-pump service-icon"></i>
+                        <div>
+                            <h3 class="service-title heading-serif">Petroleum Product</h3>
+                            <p class="service-desc">Efficient distribution of petroleum and fuel products.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Why Work With Us Panel -->
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
+                <div class="feature-card">
+                    <h3 class="feature-title">
+                        <i class="fa-solid fa-handshake"></i> WHY WORK WITH US
+                    </h3>
+                    <ul class="feature-list">
+                        <li>
+                            <div class="feature-icon-wrapper"><i class="fa-solid fa-check"></i></div>
+                            <span>Wide range of high-quality equipment.</span>
+                        </li>
+                        <li>
+                            <div class="feature-icon-wrapper"><i class="fa-solid fa-check"></i></div>
+                            <span>Well-maintained and safety compliant.</span>
+                        </li>
+                        <li>
+                            <div class="feature-icon-wrapper"><i class="fa-solid fa-certificate"></i></div>
+                            <span>Certified technicians skilled engineers and safety compliant.</span>
+                        </li>
+                        <li>
+                            <div class="feature-icon-wrapper"><i class="fa-solid fa-user-tie"></i></div>
+                            <span>Expert support and reliable service.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>  </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="cta-section">
+        <div class="container" data-aos="zoom-in">
+            <div class="cta-box">
+                <h2 class="heading-serif cta-heading">READY TO START YOUR NEXT <span class="text-orange">PROJECT?</span>
+                </h2>
+                <p class="mx-auto mb-5 text-white opacity-75"
+                    style="max-width: 700px; font-size: 1.1rem; line-height: 1.6;">
+                    Partner with VT Energies for reliable, top-tier engineering and industrial solutions. Let's build
+                    what matters. we combine deep technical expertise with a commitment to safety, quality and
+                    innovation.
+                </p>
+                <a href="contact.html" class="btn-custom btn-orange text-white fs-6 py-3 px-5">REQUEST A
+                    CONSULTATION</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-4 pe-lg-5">
+                    <a class="navbar-brand" href="index.html">
+                        <img src="assets/img/logo.png" alt="VT Energies"
+                            style="height: 100px; width: auto; display: block;">
+                    </a>
+                    <p class="mb-4 pe-lg-3 text-white opacity-50" style="font-size: 0.85rem; line-height: 1.6;">Your best
+                        solution partners, providing complete value through top-quality EPC service, marine logistics, and
+                        industrial maintenance. With a strong focus on quality, and timely project delivery, we ensure
+                        exceptional results from planning and execution to completion and ongoing support.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-orange fs-5"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="text-orange fs-5"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" class="text-orange fs-5"><i class="fa-brands fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+    
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="heading-serif text-white fs-6 mb-4">COMPANY</h5>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="about.html">HSE Policy</a></li>
+                        <li><a href="about.html">Nigerian Content</a></li>
+                    </ul>
+                </div>
+    
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="heading-serif text-white fs-6 mb-4">SERVICES</h5>
+                    <ul class="footer-links">
+                        <li><a href="haulage.html">Haulage Services</a></li>
+                        <li><a href="equipment.html">Equipment Leasing</a></li>
+                        <li><a href="repair.html">Repair & Maintenance</a></li>
+                        <li><a href="fabrication.html">Fabrication & Construction</a></li>
+                    </ul>
+                </div>
+    
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="heading-serif text-white fs-6 mb-4">CONTACT US</h5>
+                    <ul class="footer-links footer-contact">
+                        <li>
+                            <i class="fa-solid fa-location-dot mt-1"></i>
+                            <span>Head office: GV45, Close 6 Green Village Estate, Elelewon/Apajo, Rivers State</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-map-pin mt-1"></i>
+                            <span>Workshop: 12/14 Ekwu Okah Ave, Odani off Eleme Onne Rd, Port Harcourt.</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-phone mt-1"></i>
+                            <span>TELL: 08038326700, 08075089171</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-envelope mt-1"></i>
+                            <span>Email: info@vtenergies.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+    
+            <div class="row footer-bottom"
+                style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; margin-top: 3rem;">
+                <div class="col-md-6 text-center text-md-start text-white opacity-50" style="font-size: 0.85rem;">
+                    <span class="text-orange">&copy;</span> 2026 VROI-TREZ Energies Limited (RC 7025466).
+                </div>
+                <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
+                    <a href="#" class="text-white opacity-50 text-decoration-none me-3" style="font-size: 0.85rem;">Privacy
+                        Policy</a>
+                    <span class="text-white opacity-50">|</span>
+                    <a href="#" class="text-white opacity-50 text-decoration-none ms-3" style="font-size: 0.85rem;">Terms &
+                        Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            AOS.init({once: true, offset: 30, duration: 800, easing: 'ease-in-out'});
+
+            // Navbar shadow on scroll
+            const navbar = document.getElementById('mainNav');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.style.padding = '0.5rem 0';
+                    navbar.style.boxShadow = '0 4px 20px rgba(0,0,0,0.05)';
+                } else {
+                    navbar.style.padding = '1rem 0';
+                    navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.03)';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
